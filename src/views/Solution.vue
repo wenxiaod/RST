@@ -7,7 +7,7 @@
     <!-- Tab选项卡效果 -->
     <!-- 二级菜单栏吸顶效果 -->
      <div class="newsTab" id="boxFixed" :class="{'is_fixed' : isFixed}">
-      <a href="javascript:;" @click="addItem(i,item)" v-for="(item,i) in solution" :key="i"
+      <a href="javascript:;" :id="item.convertId" @click="addItem(i,item)" v-for="(item,i) in solution" :key="i"
         :class="{active:i!=nowIndex}">{{item.htmlTitle}}</a>
     </div>
 

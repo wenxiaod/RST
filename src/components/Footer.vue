@@ -133,7 +133,7 @@
             left: -16%;
         }
         width: 100%;
-        height: 300px;
+        height: 270px;
         background: #6388cf;
         margin-bottom: 0;
 

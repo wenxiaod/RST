@@ -4,7 +4,7 @@
   <Chat />
    <div class="view-box">
             <div class="positewr wrapper clearfix">
-                <span>当前位置：</span><a href="/">首页 ></a><a href="./product">硬件产品 ></a><a href="./productbyid">1100型路由器</a>
+                <span>当前位置：</span><a href="/">首页 ></a><a href="./#/product">硬件产品 ></a><a href="javascript:;">1100型路由器</a>
             </div>
         
       <div class="product-view">
@@ -17,11 +17,11 @@
                 </div>
                <div class="productho">
                     <ul class="pro-list wrapper clearfix">
-                        <li><a href="/RST1100#describe">产品概述</a></li>
-                        <li><a href="/RST1100#spectrum">组网方案拓扑图</a></li>
-                        <li><a href="/RST1100#character">功能特点及优势</a></li>
-                        <li><a href="/RST1100#parameter">技术参数</a></li>
-                        <li><a href="/RST1100#case">应用案例</a></li>
+                        <li><a href="javascript:;">产品概述</a></li>
+                        <li><a href="javascript:;">组网方案拓扑图</a></li>
+                        <li><a href="javascript:;">功能特点及优势</a></li>
+                        <li><a href="javascript:;">技术参数</a></li>
+                        <li><a href="javascript:;">应用案例</a></li>
                     </ul>
                 </div>
                 <div class="pro-info" id="describe">
@@ -106,8 +106,8 @@
             <div class="prevpage wrapper">
                 <div class="words clearfix"><span>关键词：</span><a href="#">返回上一页</a></div>
                 <div class="prebnext">
-                    <div class="preinfo"><a href="/LED">上一篇：便携式应急灯</a></div>
-                    <div class="preinfo"><a href="/KT100">下一篇：RST-KT100工业路由器</a></div>
+                    <div class="preinfo"><a href="./#/LED">上一篇：便携式应急灯</a></div>
+                    <div class="preinfo"><a href="./#/KT100">下一篇：RST-KT100工业路由器</a></div>
                 </div>
             </div>
         

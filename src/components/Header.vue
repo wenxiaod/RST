@@ -2,13 +2,13 @@
   <div id="app">
     <div id="nav">
       <a href="/" class="gohome"><img src="../../public/images/logo.png" alt=""></a>
-      <el-menu :default-active="$route.path" class="el-menu-demo is-active" mode="horizontal" @select="handleSelect">
+      <el-menu :default-active="$route.path" class="el-menu-demo is-active" mode="horizontal" @tab-click="handleClick">
         <el-menu-item index="1">
           <router-link to="/">官网</router-link>
         </el-menu-item>
 
         <el-submenu index="2">
-          <template slot="title">
+          <template slot="title" class="el-menu-item">
             <router-link to="/product">硬件产品</router-link>
           </template>
           <el-menu-item index="2-1"><router-link to="/productbyid?id=14">1100型路由器</router-link></el-menu-item>
@@ -18,7 +18,7 @@
         </el-submenu>
 
         <el-submenu index="3">
-          <template slot="title">
+          <template slot="title" class="el-menu-item">
             <router-link to="/solution">解决方案</router-link>
           </template>
           <el-menu-item index="3-1"><router-link to="/solution">数字管廊解决方案</router-link></el-menu-item>
@@ -29,7 +29,7 @@
 
 
         <el-submenu index="4">
-          <template slot="title">
+          <template slot="title" class="el-menu-item">
             <router-link to="/news">新闻动态</router-link>
           </template>
           <el-menu-item index="4-1"><router-link to="/news">公司动态</router-link></el-menu-item>
@@ -37,7 +37,7 @@
         </el-submenu>
 
         <el-submenu index="5">
-          <template slot="title">
+          <template slot="title" class="el-menu-item">
             <router-link to="/about">关于我们</router-link>
           </template>
           <el-menu-item index="5-1"><router-link to="/about">公司简介</router-link></el-menu-item>
@@ -68,9 +68,11 @@ data(){
   }
 },
  methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      },
+      handleClick(tab, event) {
+    console.log(tab, event);
+    const activeTab = this.$router.query.tab
+    this. activeName  = activeTab
+  }
   
     }
 };
@@ -149,10 +151,17 @@ data(){
 .el-menu-item.is-active{
     background: #55a4f1 !important;
 }
+.el-menu-item.is-active ul li{
+  &:active{
+     background: #55a4f1 !important;
+  }
+}
 .el-submenu__title:hover{
   background:none !important;
 }
 .el-menu--popup{
   min-width: 142px !important;
 }
+
+
 </style>
