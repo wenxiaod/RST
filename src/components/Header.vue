@@ -4,7 +4,7 @@
       <a href="/" class="gohome"><img src="../../public/images/logo.png" alt=""></a>
       <el-menu :default-active="$route.path" class="el-menu-demo is-active" mode="horizontal" @tab-click="handleClick">
         <el-menu-item index="1">
-          <router-link to="/">官网</router-link>
+          <router-link to="/" style="margin-top:4px">官网</router-link>
         </el-menu-item>
 
         <el-submenu index="2">
@@ -47,7 +47,7 @@
         </el-submenu>
 
         <el-menu-item index="6">
-          <router-link to="/relation">联系我们</router-link>
+          <router-link to="/relation" style="margin-top:4px">联系我们</router-link>
         </el-menu-item>
       </el-menu>
 

@@ -15,7 +15,7 @@
       <!-- 当前位置 -->
       <div class="productSite">
         <div class="productSiteText">
-          <span>当前位置：</span><a href="/">首页 ></a><a href="/news">新闻动态 ></a><a class="sel"
+          <span>当前位置：</span><a href="/">首页 ></a><a href="./#/news">新闻动态 ></a><a class="sel"
             href="javascript:;">公司动态</a>
         </div>
       </div>
@@ -45,7 +45,7 @@
       <!-- 当前位置 -->
       <div class="productSite">
         <div class="productSiteText">
-          <span>当前位置：</span><a href="/">首页 ></a><a href="/news">新闻动态 ></a><a class="sel"
+          <span>当前位置：</span><a href="/">首页 ></a><a href="./#/news">新闻动态 ></a><a class="sel"
             href="javascript:;">行业资讯</a>
         </div>
       </div>
@@ -301,7 +301,7 @@ z-index:2;
       background: none;
     }
     &:nth-child(4){
-      margin-left: 16%;
+      margin-left: 10%;
     }
     }
   }

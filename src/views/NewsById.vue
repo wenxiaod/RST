@@ -5,10 +5,11 @@
     <div class="view-box">
        
             <div class="positewr wrapper">
-                <span>当前位置：</span><a href="../index.html">首页 ></a><a href="new.html">新闻动态  ></a><a href="new.html">企业新闻   ></a><a class="on" href="javascript:;">正文</a>
+                <span>当前位置：</span><a href="./#/">首页 ></a><a href="./#/news">新闻动态  ></a><a href="./#/news">企业新闻   ></a><a class="on" href="javascript:;">正文</a>
             </div>
-                <iframe class="iframe" :src="newsbyid.visitPath" frameborder="0" ></iframe>
+                <!-- <iframe class="iframe" :src="newsbyid.visitPath" frameborder="0" id="test" scrolling="no" width="100%" height="100%" ></iframe> -->
             
+            <iframe name="iframe2" onload="this.height=iframe2.document.body.scrollHeight" :src="newsbyid.visitPath" frameborder="0" width="50%"></iframe>
       
     </div>
 
@@ -37,7 +38,32 @@ data(){
       // => 请求数据
       this.request_newsbyid();
     },
+mounted(){
+   /**
+     * iframe-宽高自适应显示   
+     */
+    var iframes = document.getElementsByTagName('iframe');
 
+        for (var i = 0, j = iframes.length; i < j; ++i) {
+            // 放在闭包中，防止iframe触发load事件的时候下标不匹配
+            (function(_i) {
+                iframes[_i].onload = function() {
+                    this.contentWindow.onbeforeunload = function() {
+                        iframes[_i].style.visibility = 'hidden';
+                        iframes[_i].style.display = 'none';
+
+                        iframes[_i].setAttribute('height', 'auto');
+                    };
+
+                    this.setAttribute('height', this.contentWindow.document.body.scrollHeight);
+
+                    this.style.visibility = 'visible';
+                    this.style.display = 'block';
+                };
+            })(i);
+        }
+
+},
     methods:{
  // **************************--硬件产品---新闻详情页******************************
    request_newsbyid(){
@@ -68,12 +94,13 @@ ul{
 }
 padding-top:71px;
     .iframe{
-    width: 85.8%;
-    height: 3500px;
+      width: 50%;
+    // height: 3500px; 
     display: block;
-    margin: 10px auto;
-    margin-left: 15%;
+    margin: 50px auto;
+    /* margin-left: 15%; */
     z-index: 2;
+
     .X3{
     line-height: 20px !important;
     }

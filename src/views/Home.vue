@@ -47,8 +47,8 @@
         </ul>
       </div>
 
-      <div>
-        <a href="./#/solution" class="homeReadmore">READ MORE</a>
+      <div style="width: 68%;margin: 0 auto;">
+        <a href="./#/solution" class="homeReadmore" style="margin-top: 5%;">READ MORE</a>
       </div>
     </section>
 
@@ -88,7 +88,7 @@
         </div>
       </div>
       <div>
-        <a href="./#/product" class="homeReadmore" style="margin-top:0;">READ MORE</a>
+        <a href="./#/product" class="homeReadmore" style="margin-top: -5%;">READ MORE</a>
       </div>
     </section>
 
@@ -141,7 +141,7 @@
       </div>
     </div>
     <div>
-      <a href="./#/news" class="homeReadmore">READ MORE</a>
+      <a href="./#/news" class="homeReadmore" style="margin-top: 1%;">READ MORE</a>
     </div>
 
     <!-- 合作企业 -->
@@ -404,8 +404,9 @@
 
       .textList {
         position: absolute;
-        left: 21%;
+        width: 76%;
         top: 100%;
+        margin: 0 12%;
         text-align: center;
 
 
@@ -454,9 +455,7 @@
         }
       }
 
-      .lastChild:last-child .textList {
-        left: 18.5%;
-      }
+  
     }
 
     // --轮播图样式结束
@@ -468,7 +467,7 @@
       margin: 0 auto;
 
       .home-title {
-        margin-bottom: 63px;
+        margin-bottom: 30px;
       }
 
       .commonleft {
@@ -520,7 +519,7 @@
       .swiperOptionpProduct {
         width: 100%;
         position: relative;
-        top: 5%;
+        top: -5%;
 
       }
 
@@ -650,7 +649,7 @@
           width: 100%;
           background: #6388cf;
           height: 270px;
-          // top: -55%;
+          top: -10%;
           z-index: -1;
         }
       }
@@ -858,7 +857,7 @@
       }
 
       .newsinfo {
-        width: 630px;
+        width: 566px;
         float: left;
 
         .newstop {
@@ -1098,10 +1097,10 @@
       -moz-transform: scale(1.05);
     }
 
-    .solutionli li:hover .solutebox {
-      opacity: 1;
-      visibility: visible;
-    }
+    // .solutionli li:hover .solutebox {
+    //   opacity: 1;
+    //   visibility: visible;
+    // }
 
     .solutionli li:hover .solutewr {
       opacity: 1;

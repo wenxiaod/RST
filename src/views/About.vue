@@ -98,22 +98,23 @@
         <!-- 大视频 -->
         <div class="videoBig">
           <h3>公司视频</h3>
-          <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" @click="handleVideo()"
+          <!-- 禁用下载：controlslist="nodownload" -->
+          <video id="my-video" class="video-js" controls  preload="auto" width="640" height="264" @click="handleVideo()"
             poster="MY_VIDEO_POSTER.jpg" data-setup="{}" style="cursor: pointer;">
             <source :src="video[1].aboutUsFileLink" /></video>
         </div>
         <!-- 大视频遮罩 -->
-        <el-dialog :visible.sync="dialogVisible" width="840px" height="480" :before-close="handleClose">
-          <h3 style="margin-top: -15px;text-align: center;font-size:24px;">数字管廊解决方案</h3>
+        <el-dialog :visible.sync="dialogVisible" width="1200px" height="600px" :before-close="handleClose">
+          <!-- <h3 style="margin-top: -15px;text-align: center;font-size:24px;">数字管廊解决方案</h3> -->
           <el-divider />
-          <video id="video" controls width="800" height="480" poster="MY_VIDEO_POSTER.jpg">
+          <video id="video" controls width="1200" height="600px" poster="" autoplay="autoplay">
             <source :src="video[1].aboutUsFileLink" type="video/mp4">
           </video>
-          <span slot="footer" class="dialog-footer">
+          <!-- <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">
               <router-link to="./relation">联系我们</router-link>
             </el-button>
-          </span>
+          </span> -->
         </el-dialog>
 <!-- 小视频遮罩 -->
 <div class="videoSmall">
@@ -124,37 +125,37 @@
             <source :src="video[0].aboutUsFileLink" type="video/mp4" /></video>
         </div>
         <!-- cpe遮罩 -->
-        <el-dialog :visible.sync="dialogVisibleCPE" width="840px" height="480" :before-close="handleCloseCPE">
-          <h3 style="margin-top: -15px;text-align: center;font-size:24px;">便捷式应急灯</h3>
+        <el-dialog :visible.sync="dialogVisibleCPE" width="1200px" height="600px" :before-close="handleCloseCPE">
+          <!-- <h3 style="margin-top: -15px;text-align: center;font-size:24px;">便捷式应急灯</h3> -->
           <el-divider />
-          <video id="videoCPE" controls width="800" height="480" poster="MY_VIDEO_POSTER.jpg">
+          <video id="videoCPE" controls width="1200px" height="600px" poster="MY_VIDEO_POSTER.jpg" autoplay="autoplay">
             <source :src="video[0].aboutUsFileLink" type="video/mp4">
           </video>
-          <span slot="footer" class="dialog-footer">
+          <!-- <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">
              <router-link to="./relation">联系我们</router-link>
             </el-button>
-          </span>
+          </span> -->
         </el-dialog>
 
    <!-- 数字管廊解决方案 -->
           <div class="videoGL">
-          <video id="my-video" class="video-js videobox" controls preload="auto" width="640" height="264" @click="handleVideo()"
+          <video id="my-video" class="video-js videobox" controls preload="auto" width="640" height="264" @click="handleVideoGL()"
             poster="MY_VIDEO_POSTER.jpg" data-setup="{}" style="cursor: pointer;">
             <source :src="video[1].aboutUsFileLink" /></video>
         </div>
         <!-- 数字管廊解决方案遮罩 -->
-         <el-dialog :visible.sync="dialogVisible" width="840px" height="480" :before-close="handleClose">
-          <h3 style="margin-top: -15px;text-align: center;font-size:24px;">数字管廊解决方案</h3>
+         <el-dialog :visible.sync="dialogVisibleGL" width="1200pxpx" height="600px" :before-close="handleCloseGL">
+          <!-- <h3 style="margin-top: -15px;text-align: center;font-size:24px;">数字管廊解决方案</h3> -->
           <el-divider />
-          <video id="video" controls width="800" height="480" poster="MY_VIDEO_POSTER.jpg">
+          <video id="videoGL" controls width="1200px" height="600px" poster="MY_VIDEO_POSTER.jpg" autoplay="autoplay">
             <source :src="video[1].aboutUsFileLink" type="video/mp4">
           </video>
-          <span slot="footer" class="dialog-footer">
+          <!-- <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">
               <router-link to="./relation">联系我们</router-link>
             </el-button>
-          </span>
+          </span> -->
         </el-dialog>
 
            <!-- 智慧燃气解决方案 -->
@@ -164,17 +165,17 @@
             <source :src="video[2].aboutUsFileLink" type="video/mp4" /></video>
         </div>
         <!-- 智慧燃气解决方案遮罩 -->
-        <el-dialog :visible.sync="dialogVisibleGAS" width="840px" height="480" :before-close="handleCloseGAS">
-          <h3 style="margin-top: -15px;text-align: center;font-size:24px;">智慧燃气解决方案</h3>
+        <el-dialog :visible.sync="dialogVisibleGAS" width="1200px" height="600px" :before-close="handleCloseGAS">
+          <!-- <h3 style="margin-top: -15px;text-align: center;font-size:24px;">智慧燃气解决方案</h3> -->
           <el-divider />
-          <video id="videoGAS" controls width="800" height="480" poster="MY_VIDEO_POSTER.jpg">
+          <video id="videoGAS" controls width="1200px" height="600px" poster="MY_VIDEO_POSTER.jpg" autoplay="autoplay">
             <source :src="video[2].aboutUsFileLink" type="video/mp4">
           </video>
-          <span slot="footer" class="dialog-footer">
+          <!-- <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">
               <router-link to="./relation">联系我们</router-link>
             </el-button>
-          </span>
+          </span> -->
         </el-dialog>
 </div>
 
@@ -278,6 +279,7 @@
         dialogVisible: false,
         dialogVisibleCPE: false,
         dialogVisibleGAS: false,
+        dialogVisibleGL: false,
         nowIndex: 0,
         active_text: '关于我们',
         text: ['公司简介', '公司视频', '荣誉资质'],
@@ -354,6 +356,16 @@
       },
       handleVideoCPE() {
         this.dialogVisibleCPE = true
+      },
+      // *********管廊*************
+       handleCloseGL() {
+        this.dialogVisibleGL = false
+        // 关闭弹出框时 视频关闭播放
+        const video = document.getElementById('videoGL')
+        video.pause()
+      },
+      handleVideoGL() {
+        this.dialogVisibleGL = true
       },
        // *********智慧燃气解决方案***********
        handleCloseGAS() {
@@ -543,6 +555,19 @@
 
     }
 
+// 遮罩
+// 去除白色背景
+ .el-dialog, .el-pager li {
+    background:none;
+}
+// 去除关闭按钮 
+.el-icon-close:before {
+    // content: "\e6db";
+}
+// 去除水平线
+.el-divider--horizontal{
+  display: none;
+}
     .videoSmall {
      width: 68%;
     margin-left: 16%;
