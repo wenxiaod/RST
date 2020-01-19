@@ -1,9 +1,9 @@
 <template>
   <div class="solution">
     <div class="solutionList">
-      <div class="solutionHead"><img src="http://192.168.1.115:8080/picture/homePic/banner2.jpg"></div>
+      <div class="solutionHead "><img src="../../public/images/homeAboutUsBack.jpg"></div>
       <!-- 联系方式 -->
-      <section class="contactfix">
+      <section class="contactfix ">
         <div class="solutionMap">
           <!-- 地图组件 -->
           <Map />
@@ -43,7 +43,18 @@
         </div>
       </section>
     </div>
+    <!-- <div style="background:green; width: 1000px; height: 1000px; margin-left: 28%; display:flex;" > 
+<div style="background:orange; width: 100px; height: 100px; margin: 3%;" @click="change"></div>
+<div style="background:orange; width: 100px; height: 100px; margin: 3%;"></div>
+<div style="background:orange; width: 100px; height: 100px; margin: 3%;"></div>
+<div style="background:orange; width: 100px; height: 100px; margin: 3%;"></div>
 
+   
+<div style="background:orange; width: 100px; height: 100px; margin: 3%;"></div>
+<div style="background:orange; width: 100px; height: 100px; margin: 3%;"></div>
+<div style="background:orange; width: 100px; height: 100px; margin: 3%;"></div>
+<div style="background:orange; width: 100px; height: 100px; margin: 3%;"></div>
+ </div> -->
   </div>
 </template>
 <script>
@@ -113,6 +124,7 @@
         top: -171px;
         left: 42%;
         z-index: 2;
+
       }
 
       .contactwr {

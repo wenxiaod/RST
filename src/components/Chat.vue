@@ -7,34 +7,55 @@
                 <p>成都蓉视通科技有限公司·在线咨询</p>
                 <button @click="chatSwitch()">X</button>
             </div>
-            <div class="contents">
+            <div id="box-container" class="contents" style="overflow-y:scroll;">
                 <!-- 客服 -->
-                <div class="infos">
-                    <img src="../../public/images/chatHead.png" alt="">
-                    <p>咨询师-温某人</p>
-                    <p>{{t}}</p>
-                </div>
-                <div class="message" >
-                    <p>{{txtMessage}}</p>
-                   
-                </div>
-
-                <!-- 我的发送 -->
-                <div class="infosClict">
-                    <img src="../../public/images/chatClient.png" alt="">
-                    <p>{{t}}</p>
-                    <p>我</p>
-
-                </div>
-                <div class="messageClict">
-                    <p>{{sendMessageLocal}}</p>
-                </div>
-
-            </div>
-            <div class="foot">
-                <input type="text" v-model="sendMessage" ref="inputValue" placeholder="请输入内容..." required>
-                 <el-button :plain="true"  class="button" @click="send()" value="发送">发送</el-button>
                 
+                
+                <div class="infos">
+                    <img src="../../public/images/chatClient.png" alt="">
+                    <p>咨询师-小璐</p>
+                    <p>{{t}}</p>
+                </div>
+                <div class="message">
+                    <p>请问有什么可以帮您？</p>
+
+                </div>
+
+                <!-- 读取发送记录 -->
+                <div v-for="(item,index) in sendMessageRecord" :key="index">
+                <!-- 我的发送 -->
+                <div v-if="infosClictStore" class="infosClict">
+                    <img src="../../public/images/chatHead.png" alt="">
+                    <p>{{nowTime}}</p>
+                    <p>我</p>
+                    </div>
+                    <div class="messageClict" style="word-wrap:break-word;">
+                        <p>{{item}}</p>
+                    </div>
+
+             <!-- 读取接收记录 -->
+             <div v-for="(item,index) in txtMessageRe" :key="index">    
+                     <div v-if="txtMessageReStore" class="infos">
+                    <img src="../../public/images/chatClient.png" alt="">
+                    <p>咨询师-小璐</p>
+                    <p>{{t}}</p>
+                </div>
+                <div class="message">
+                <p>{{item}}</p>
+                </div>
+
+
+                    
+                </div>
+            </div>
+                 
+
+          </div>
+            <div class="foot">
+                <input type="text" v-model="sendMessage" ref="inputValue" placeholder="请输入内容..." @keyup.enter="send()"
+                    required>
+                <el-button :plain="true" class="button" @click="send()" value="发送">发送</el-button>
+
             </div>
         </div>
     </div>
@@ -47,16 +68,22 @@
             return {
                 chatSwitchStore: false,
                 sendMessage: '',
-                sendMessageLocal:'',
-                txtMessage: '',
-                path:'ws://192.168.1.115:8080/websocket/',
+                sendMessageLocal: '',
+                txtMessage: "",
+                txtMessageReStore:false,
+                txtMessageRe:[],
+                path: 'ws://121.36.35.253:8080/websocket/',
                 socket: '',
-                t:""
+                t: "",
+                nowTime:"",
+                infosClictStore: false,
+                sendMessageRecord: []
             }
         },
         mounted() {
             // 初始化
-            this.init()
+            this.init();
+            
         },
         methods: {
             // onAdd() {
@@ -66,18 +93,18 @@
             // 聊天框开关
             chatSwitch() {
                 this.chatSwitchStore = !this.chatSwitch;
-              
+
             },
             onlineChat() {
                 this.chatSwitchStore = !this.chatSwitchStore;
-                        //判断当前浏览器是否支持WebSocket
+                //判断当前浏览器是否支持WebSocket
                 if (typeof (WebSocket) === 'undefined') {
                     alert('您的浏览器不支持socket')
                 } else {
                     // 实例化socket
-                 var t=new Date().toLocaleTimeString();//当前时间
-                 this.t=t;
-                    this.socket = new WebSocket("ws://192.168.1.115:8080/websocket/"+this.t)
+                    var t = new Date().toLocaleTimeString(); //当前时间
+                    this.t = t;
+                    this.socket = new WebSocket("ws://121.36.35.253:8080/websocket/" + this.t)
                     // 监听socket连接
                     this.socket.onopen = this.open
                     // 监听socket错误信息
@@ -87,44 +114,57 @@
                 }
             },
             init: function () {
-              
-            },
-        send(){
-            if(!this.sendMessage){
-            this.$message({
-            message:'错误，请输入内容再点击发送！',
-            type: 'error',
-            offset:350
-        })
-        }
-        else{
-        this.$refs.inputValue.value="";
-        var msgs = '{"ip":"'+this.t+'","content":"'+this.sendMessage+'","state":"index"}';
-        this.$axios({
-        url: "http://192.168.1.115:8080/sms/communication",        //后台url
-        params: {msg:msgs,ids:"rst"},
-        // cache: false,
-        // async: false,
-        type: "GET",            //类型，POST或者GET
-        dataType: 'json',              //数据返回类型，可以是xml、json等
-        // dataType: 'JSONP',
-        success: function (msg) {
-            if (msg.code == 0) {
-               alert("发送成功")
-            } else {
-                alert("发送失败")
 
-            }
-        }
-        });
-        this.$message({
-          message: '信息发送成功，请耐心等待回复！',
-          type: 'success',
-          offset:350
-        });
-        this.sendMessageLocal=this.sendMessage;
-        this.sendMessage='';
-        }
+            },
+            send() {
+                if (!this.sendMessage) {
+                    this.$message({
+                        message: '错误，请输入内容再点击发送！',
+                        type: 'error',
+                        offset: 350
+                    })
+                } else {
+                    this.txtMessage=""
+                    this.$refs.inputValue.value = "";
+                    var msgs = '{"ip":"' + this.t + '","content":"' + this.sendMessage + '","state":"index"}';
+                    this.$axios({
+                        url: "http://121.36.35.253:8080/sms/communication", //后台url
+                        params: {
+                            msg: msgs,
+                            ids: "rst"
+                        },
+                        // cache: false,
+                        // async: false,
+                        type: "GET", //类型，POST或者GET
+                        dataType: 'json', //数据返回类型，可以是xml、json等
+                        // dataType: 'JSONP',
+                        success: function (msg) {
+                            if (msg.code == 0) {
+                                alert("发送成功")
+                            } else {
+                                alert("发送失败")
+
+                            }
+                        }
+                    });
+                    this.$message({
+                        message: '信息发送成功，请耐心等待回复！',
+                        type: 'success',
+                        offset: 350,
+
+                    });
+                    this.infosClictStore = true;
+                    this.sendMessageLocal = this.sendMessage;
+                    this.sendMessageRecord.push(this.sendMessage);
+                    this.sendMessage = '';
+                    var nowTime = new Date().toLocaleTimeString(); //当前时间
+                    this.nowTime = nowTime;
+                    // var item = {'time':nowTime};
+                    // this.nowTime.push(nowTime);
+
+                    
+
+                }
             },
             open: function () {
                 console.log('socket连接成功')
@@ -133,17 +173,20 @@
                 console.log('连接错误')
             },
             getMessage: function (msg) {
-                this.txtMessage = msg.data
-                console.log(msg.data)
+            this.txtMessageReStore = true;
+            this.txtMessage = msg.data;
+            this.txtMessageRe.push(this.txtMessage);
+            console.log(msg.data)
+            
             },
-     
+
             close: function () {
                 console.log('socket已经关闭')
             }
         },
         destroyed() {
             // 销毁监听
-            this.socket.onclose = this.close
+            this.socket.onclose = this.close;
         }
     }
 </script>
@@ -230,7 +273,7 @@
                 display: flex;
                 align-items: center;
                 font-size: 12px;
-                padding-top: 45px;
+                // padding-top: 45px;
 
                 img {
                     position: relative;
@@ -239,9 +282,9 @@
                 }
 
                 p {
-                    margin-right: 5%;
-                    position: relative;
-                    left: 50%;
+                        margin-right: 5%;
+    position: relative;
+    left: 44%;
                 }
             }
 
@@ -251,9 +294,12 @@
                 border-radius: 5px;
                 text-align: left;
 
+
                 p {
                     background: #bde1f1;
-                    text-align: center;
+    text-align: center;
+    font-size: 16px;
+    width: 244.8px;
                 }
             }
         }
@@ -265,13 +311,14 @@
 
             input {
                 width: 98%;
-                height: 65%;
+                height: 55%;
                 margin-left: 1.5px;
+                margin-top: 1.5px;
                 font-size: 18px;
             }
 
             .button {
-                
+
                 height: 35px;
                 font-size: 16px;
                 color: #f08605;
@@ -285,7 +332,7 @@
                     background: #f08605;
                 }
             }
-         
+
         }
     }
 </style>

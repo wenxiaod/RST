@@ -7,85 +7,133 @@ Vue.use(VueRouter);
 const routes = [{
         path: "/",
         name: "home",
-        component: Home
+        component: Home,
+        meta: {
+            title: '蓉视通-化工管廊-公共管廊-智慧化工管廊数字管理系统'
+        }
+
     },
     {
         path: "/product",
         name: "product",
         // 链接 硬件产品 视图
         component: () =>
-            import ("../views/Product.vue")
+            import ("../views/Product.vue"),
+        meta: {
+            title: '硬件产品-成都蓉视通科技有限公司'
+        }
+
     },
     {
         path: "/productbyid",
         name: "productbyid",
         // 链接 硬件产品 视图
         component: () =>
-            import ("../views/ProductById.vue")
+            import ("../views/ProductById.vue"),
+        meta: {
+            title: '硬件产品-成都蓉视通科技有限公司'
+        }
+
     },
-    {
-        path: "/rst1100",
-        name: "rst1100",
-        // 链接 硬件产品详情页 视图
-        component: () =>
-            import ("../views/RST1100.vue")
-    },
-    {
-        path: "/kt100",
-        name: "kt100",
-        // 链接 硬件产品详情页 视图
-        component: () =>
-            import ("../views/KT100.vue")
-    },
-    {
-        path: "/cpe",
-        name: "cpe",
-        // 链接 硬件产品详情页 视图
-        component: () =>
-            import ("../views/CPE.vue")
-    },
-    {
-        path: "/led",
-        name: "led",
-        // 链接 硬件产品详情页 视图
-        component: () =>
-            import ("../views/LED.vue")
-    },
+    // {
+    //     path: "/rst1100",
+    //     name: "rst1100",
+    //     // 链接 硬件产品详情页 视图
+    //     component: () =>
+    //         import ("../views/RST1100.vue"),
+    //     meta: {
+    //         title: '硬件产品-成都蓉视通科技有限公司'
+    //     }
+
+    // },
+    // {
+    //     path: "/kt100",
+    //     name: "kt100",
+    //     // 链接 硬件产品详情页 视图
+    //     component: () =>
+    //         import ("../views/KT100.vue"),
+    //     meta: {
+    //         title: '硬件产品-成都蓉视通科技有限公司'
+    //     }
+
+    // },
+    // {
+    //     path: "/cpe",
+    //     name: "cpe",
+    //     // 链接 硬件产品详情页 视图
+    //     component: () =>
+    //         import ("../views/CPE.vue"),
+    //     meta: {
+    //         title: '硬件产品-成都蓉视通科技有限公司'
+    //     }
+
+    // },
+    // {
+    //     path: "/led",
+    //     name: "led",
+    //     // 链接 硬件产品详情页 视图
+    //     component: () =>
+    //         import ("../views/LED.vue"),
+    //     meta: {
+    //         title: '硬件产品-成都蓉视通科技有限公司'
+    //     }
+
+    // },
 
     {
         path: "/solution",
         name: "solution",
         // 链接 解决方案 视图
         component: () =>
-            import ("../views/Solution.vue")
+            import ("../views/Solution.vue"),
+        meta: {
+            title: '解决方案-成都蓉视通科技有限公司'
+        }
+
     },
     {
         path: "/news",
         name: "news",
         // 链接 新闻动态 视图
         component: () =>
-            import ("../views/News.vue")
+            import ("../views/News.vue"),
+        meta: {
+            title: '新闻动态-成都蓉视通科技有限公司'
+        }
+
     },
     {
         path: "/newsbyid",
         name: "newsbyid",
         // 链接 硬件产品 视图
         component: () =>
-            import ("../views/NewsById.vue")
+            import ("../views/NewsById.vue"),
+        meta: {
+            title: '新闻动态-成都蓉视通科技有限公司'
+        }
+
     },
     {
         path: "/about",
         name: "about",
         // 链接 关于我们 视图
         component: () =>
-            import ("../views/About.vue")
+            import ("../views/About.vue"),
+        meta: {
+            title: '关于我们-成都蓉视通科技有限公司'
+        }
+
     },
     {
         path: "/relation",
         name: "relation",
         // 链接 联系我们 视图
         component: () =>
-            import ("../views/Relation.vue")
+            import ("../views/Relation.vue"),
+        meta: {
+            title: '联系我们-成都蓉视通科技有限公司'
+        }
+
     },
 ];
 

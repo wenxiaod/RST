@@ -2,7 +2,7 @@
   <div id="about">
     <onlineQQ />
     <Chat />
-    <img class="aboutUsHead" src="../../public/images/aboutUsHead.jpg" alt="">
+    <img class="aboutUsHead " src="../../public/images/aboutUsHead.jpg" alt="">
     <!-- Tab选项卡效果 -->
     <!-- 吸顶效果 -->
     <div class="newsTab" id="boxFixed" :class="{'is_fixed' : isFixed}">
@@ -10,31 +10,32 @@
         :class="{active:i!=nowIndex}">{{item}}</a>
     </div>
 
+
     <!-- 公司简介 -->
     <div v-show="nowIndex === 0" class="content" id="aboutIntro">
       <!-- 当前位置 -->
       <div class="productSite">
         <div class="productSiteText">
-          <span>当前位置：</span><a href="/">首页 ></a><a href="/about">关于我们 ></a><a class="sel" href="javascript:;">公司简介</a>
+          <span>当前位置：</span><a href="/">首页 ></a><a href="/#/about">关于我们 ></a><a class="sel" href="javascript:;">公司简介</a>
         </div>
       </div>
 
       <!-- 公司简介内容区 -->
 
-      <div class="abouted">
+      <div class="abouted ">
         <div class="aboutts">
           <small>{{about[1].aboutUsTitleEn}}</small>
           <h3>{{about[1].aboutUsTitle}}</h3>
         </div>
         <!-- tab -->
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="公司简介" name="first">
+          <el-tab-pane label="公司简介" name="first" style="top:0;">
             <!-- 公司简介区域 -->
             <div class="aboutin">
               <p>{{about[1].aboutUsContent}}</p>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="企业文化" name="second">
+          <el-tab-pane label="企业文化" name="second" style="top:0;">
             <!-- 企业文化区域 -->
             <div class="aboutin">
               <p> {{about[0].aboutUsContent}}</p>
@@ -91,16 +92,17 @@
         <!-- 当前位置 -->
         <div class="productSite">
           <div class="productSiteText">
-            <span>当前位置：</span><a href="/">首页 ></a><a href="/about">关于我们 ></a><a class="sel" href="javascript:;">公司视频</a>
+            <span>当前位置：</span><a href="/">首页 ></a><a href="/#/about">关于我们 ></a><a class="sel"
+              href="javascript:;">公司视频</a>
           </div>
         </div>
         <!-- 公司视频内容区 -->
         <!-- 大视频 -->
-        <div class="videoBig">
+        <div class="videoBig ">
           <h3>公司视频</h3>
           <!-- 禁用下载：controlslist="nodownload" -->
-          <video id="my-video" class="video-js" controls  preload="auto" width="640" height="264" @click="handleVideo()"
-            poster="MY_VIDEO_POSTER.jpg" data-setup="{}" style="cursor: pointer;">
+          <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" @click="handleVideo()"
+            poster="MY_VIDEO_POSTER.jpg" data-setup="{}" style="cursor: pointer;width: 470px">
             <source :src="video[1].aboutUsFileLink" /></video>
         </div>
         <!-- 大视频遮罩 -->
@@ -116,100 +118,84 @@
             </el-button>
           </span> -->
         </el-dialog>
-<!-- 小视频遮罩 -->
-<div class="videoSmall">
-      <!-- CPE -->
-        <div class="videoCPE">
-          <video id="my-video" class="video-js videobox" controls preload="auto" width="640" height="264" @click="handleVideoCPE()"
-            poster="MY_VIDEO_POSTER.jpg" data-setup="{}" style="cursor: pointer;">
-            <source :src="video[0].aboutUsFileLink" type="video/mp4" /></video>
-        </div>
-        <!-- cpe遮罩 -->
-        <el-dialog :visible.sync="dialogVisibleCPE" width="1200px" height="600px" :before-close="handleCloseCPE">
-          <!-- <h3 style="margin-top: -15px;text-align: center;font-size:24px;">便捷式应急灯</h3> -->
-          <el-divider />
-          <video id="videoCPE" controls width="1200px" height="600px" poster="MY_VIDEO_POSTER.jpg" autoplay="autoplay">
-            <source :src="video[0].aboutUsFileLink" type="video/mp4">
-          </video>
-          <!-- <span slot="footer" class="dialog-footer">
+        <!-- 小视频遮罩 -->
+        <div class="videoSmall ">
+          <!-- CPE -->
+          <div class="videoCPE">
+            <video id="my-video" class="video-js videobox" controls preload="auto" width="640" height="264"
+              @click="handleVideoCPE()" poster="MY_VIDEO_POSTER.jpg" data-setup="{}" style="cursor: pointer;">
+              <source :src="video[0].aboutUsFileLink" type="video/mp4" /></video>
+          </div>
+          <!-- cpe遮罩 -->
+          <el-dialog :visible.sync="dialogVisibleCPE" width="1200px" height="600px" :before-close="handleCloseCPE">
+            <!-- <h3 style="margin-top: -15px;text-align: center;font-size:24px;">便捷式应急灯</h3> -->
+            <el-divider />
+            <video id="videoCPE" controls width="1200px" height="600px" poster="MY_VIDEO_POSTER.jpg"
+              autoplay="autoplay">
+              <source :src="video[0].aboutUsFileLink" type="video/mp4">
+            </video>
+            <!-- <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">
              <router-link to="./relation">联系我们</router-link>
             </el-button>
           </span> -->
-        </el-dialog>
+          </el-dialog>
 
-   <!-- 数字管廊解决方案 -->
+          <!-- 数字管廊解决方案 -->
           <div class="videoGL">
-          <video id="my-video" class="video-js videobox" controls preload="auto" width="640" height="264" @click="handleVideoGL()"
-            poster="MY_VIDEO_POSTER.jpg" data-setup="{}" style="cursor: pointer;">
-            <source :src="video[1].aboutUsFileLink" /></video>
-        </div>
-        <!-- 数字管廊解决方案遮罩 -->
-         <el-dialog :visible.sync="dialogVisibleGL" width="1200pxpx" height="600px" :before-close="handleCloseGL">
-          <!-- <h3 style="margin-top: -15px;text-align: center;font-size:24px;">数字管廊解决方案</h3> -->
-          <el-divider />
-          <video id="videoGL" controls width="1200px" height="600px" poster="MY_VIDEO_POSTER.jpg" autoplay="autoplay">
-            <source :src="video[1].aboutUsFileLink" type="video/mp4">
-          </video>
-          <!-- <span slot="footer" class="dialog-footer">
+            <video id="my-video" class="video-js videobox" controls preload="auto" width="640" height="264"
+              @click="handleVideoGL()" poster="MY_VIDEO_POSTER.jpg" data-setup="{}" style="cursor: pointer;">
+              <source :src="video[1].aboutUsFileLink" /></video>
+          </div>
+          <!-- 数字管廊解决方案遮罩 -->
+          <el-dialog :visible.sync="dialogVisibleGL" width="1200pxpx" height="600px" :before-close="handleCloseGL">
+            <!-- <h3 style="margin-top: -15px;text-align: center;font-size:24px;">数字管廊解决方案</h3> -->
+            <el-divider />
+            <video id="videoGL" controls width="1200px" height="600px" poster="MY_VIDEO_POSTER.jpg" autoplay="autoplay">
+              <source :src="video[1].aboutUsFileLink" type="video/mp4">
+            </video>
+            <!-- <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">
               <router-link to="./relation">联系我们</router-link>
             </el-button>
           </span> -->
-        </el-dialog>
+          </el-dialog>
 
-           <!-- 智慧燃气解决方案 -->
-        <div class="videoGAS">
-          <video id="my-video" class="video-js videobox" controls preload="auto" width="640" height="264" @click="handleVideoGAS()"
-            poster="MY_VIDEO_POSTER.jpg" data-setup="{}" style="cursor: pointer;">
-            <source :src="video[2].aboutUsFileLink" type="video/mp4" /></video>
-        </div>
-        <!-- 智慧燃气解决方案遮罩 -->
-        <el-dialog :visible.sync="dialogVisibleGAS" width="1200px" height="600px" :before-close="handleCloseGAS">
-          <!-- <h3 style="margin-top: -15px;text-align: center;font-size:24px;">智慧燃气解决方案</h3> -->
-          <el-divider />
-          <video id="videoGAS" controls width="1200px" height="600px" poster="MY_VIDEO_POSTER.jpg" autoplay="autoplay">
-            <source :src="video[2].aboutUsFileLink" type="video/mp4">
-          </video>
-          <!-- <span slot="footer" class="dialog-footer">
+          <!-- 智慧燃气解决方案 -->
+          <div class="videoGAS">
+            <video id="my-video" class="video-js videobox" controls preload="auto" width="640" height="264"
+              @click="handleVideoGAS()" poster="MY_VIDEO_POSTER.jpg" data-setup="{}" style="cursor: pointer;">
+              <source :src="video[2].aboutUsFileLink" type="video/mp4" /></video>
+          </div>
+          <!-- 智慧燃气解决方案遮罩 -->
+          <el-dialog :visible.sync="dialogVisibleGAS" width="1200px" height="600px" :before-close="handleCloseGAS">
+            <!-- <h3 style="margin-top: -15px;text-align: center;font-size:24px;">智慧燃气解决方案</h3> -->
+            <el-divider />
+            <video id="videoGAS" controls width="1200px" height="600px" poster="MY_VIDEO_POSTER.jpg"
+              autoplay="autoplay">
+              <source :src="video[2].aboutUsFileLink" type="video/mp4">
+            </video>
+            <!-- <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">
               <router-link to="./relation">联系我们</router-link>
             </el-button>
           </span> -->
-        </el-dialog>
-</div>
-
-        <!-- 轮播
-        <div class="videoSwiper">
-          <swiper class="partnerSwiper" :options="swiperOptionVideo" ref="mySwiper">
-           
-            <swiper-slide v-for="(item,index) in video" :key="index">
-              <video id="my-video" class="video-js videobox" controls preload="auto" width="640" height="264"
-                @click="handleVideo()" poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
-                <source :src="item.aboutUsFileLink" /></video>
-            </swiper-slide>
-            <div class="swiper-button-prev site" style="left:15%;" slot="button-prev"></div>
-            <div class="swiper-button-next site" style="right:16%;" slot="button-next"></div>
-          </swiper>
-        </div> -->
-
-       
-
-
+          </el-dialog>
+        </div>
 
       </div>
     </div>
 
     <!-- 荣誉资质 -->
-    <div v-show="nowIndex === 2" class="content">
+    <div v-show="nowIndex === 2" class="content" id="aboutAptitude">
       <!-- 当前位置 -->
       <div class="productSite">
         <div class="productSiteText">
-          <span>当前位置：</span><a href="/">首页 ></a><a href="/about">关于我们 ></a><a class="sel" href="javascript:;">荣誉资质</a>
+          <span>当前位置：</span><a href="/">首页 ></a><a href="/#/about">关于我们 ></a><a class="sel" href="javascript:;">荣誉资质</a>
         </div>
       </div>
       <!-- 荣誉资质内容区 -->
-      <div class="honorbox">
+      <div class="honorbox ">
         <div class="support wrapper">
           <div class="honor">
             <div class="advantitle">
@@ -227,39 +213,45 @@
             <!-- 第一页 -->
             <el-tabs v-model="activeName" @tab-click="handleClick" class="first-con">
               <el-tab-pane label="1" name="first">
-                <ul class="honor-list clearfix ">
+                <ul class="honor-list clearfix honor-list-first">
                   <li v-for="(item,index) in first" :key="index"><img :src="item.aboutUsFileLink" /></li>
                 </ul>
               </el-tab-pane>
-              <!-- 第二页 -->
+              <!-- 第二页
               <el-tab-pane label="2" name="second">
                 <ul class="honor-list clearfix">
-                  <li v-for="(item,index) in second" :key="index"><img :src="item.aboutUsFileLink" /></li>
+                  <li v-for="(item,index) in second" :key="index"><img :src="item.aboutUsFileLink" style="padding: 38px 20px !important;"/></li>
                 </ul>
               </el-tab-pane>
-              <!-- 第三页 -->
+               第三页 
               <el-tab-pane label="3" name="three">
                 <ul class="honor-list clearfix">
-                  <li v-for="(item,index) in three" :key="index"><img :src="item.aboutUsFileLink" /></li>
-                  <h3 style="margin-top:50px;">暂无数据，敬请期待...</h3>
+                  <li v-for="(item,index) in three" :key="index"><img :src="item.aboutUsFileLink" style="padding: 38px 20px !important;"/></li>                  
                 </ul>
               </el-tab-pane>
-              <!-- 第四页 -->
+              第四页 
               <el-tab-pane label="4" name="four">
                 <ul class="honor-list clearfix">
-                  <li v-for="(item,index) in four" :key="index"><img :src="item.aboutUsFileLink" /></li>
+                  <li v-for="(item,index) in four" :key="index"><img :src="item.aboutUsFileLink" style="padding: 38px 20px !important;"/></li>
                   <h3 style="margin-top:50px;">暂无数据，敬请期待...</h3>
                 </ul>
               </el-tab-pane>
-              <!-- 第五页 -->
+               第五页 
               <el-tab-pane label="5" name="five">
                 <ul class="honor-list clearfix">
-                  <li v-for="(item,index) in five" :key="index"><img :src="item.aboutUsFileLink" /></li>
+                  <li v-for="(item,index) in five" :key="index"><img :src="item.aboutUsFileLink" style="padding: 38px 20px !important;"/></li>
                   <h3 style="margin-top:50px;">暂无数据，敬请期待...</h3>
                 </ul>
-              </el-tab-pane>
+              </el-tab-pane> -->
 
             </el-tabs>
+            <!-- 分页组件 -->
+            <Pager
+            :page-index="currentPage" 
+            :total="count" 
+            :page-size="pageSize" 
+            @change="pageChange">
+            </Pager>
 
           </div>
         </div>
@@ -272,6 +264,7 @@
 <script>
   import onlineQQ from "../components/onlineQQ"
   import Chat from "../components/Chat"
+  import Pager from "../components/Pager"
   export default {
     name: "about",
     data() {
@@ -312,31 +305,85 @@
             el: ".swiper-pagination"
           }
         },
+        // 分页
+                pageSize : 9 , //每页显示9条数据
+                currentPage : 1, //当前页码
+                count : "", //总记录数
+                items : []
+
 
       }
     },
     components: {
       onlineQQ,
-      Chat
+      Chat,
+      Pager
     },
     created() {
       // => 请求数据挂载
       this.request_about();
-      this.request_honor_first();
+      // this.request_honor_first();
       this.request_honor_second();
       this.request_honor_three();
       this.request_honor_four();
       this.request_honor_five();
       this.request_video();
+      this.showInfo();
     },
     mounted() {
-      // 监听屏幕滚动
-      window.addEventListener('scroll', this.initHeight);
-      this.$nextTick(() => {
-        this.offsetTop = document.querySelector('#boxFixed').offsetTop;
-      })
+      //请求第一页数据
+            this.getList()
+      //   // 监听屏幕滚动（吸顶效果取消）
+      //   window.addEventListener('scroll', this.initHeight);
+      //   this.$nextTick(() => {
+      //     this.offsetTop = document.querySelector('#boxFixed').offsetTop;
+      //   })
     },
     methods: {
+       getList () {
+          this.$axios
+          .get("/about/getPageByType", {
+            params: {
+              //每页显示条数 
+              limit:this.pageSize,
+              // 显示页数
+              page: this.currentPage,
+              type: "荣誉资质"
+            }
+          })
+          .then(first => {
+             this.count = first.data.count;
+            //  this.items = 
+            this.first = first.data.data;
+            console.log(this.count);
+          })
+            },
+ 
+            //从page组件传递过来的当前page
+            pageChange (page) {
+                this.currentPage = page
+                this.getList()
+            },
+
+                
+      addItem: function (index, active_text) {
+        this.nowIndex = index;
+        this.active_text = active_text;
+      },
+      //跳转至锚点 
+      showInfo() {
+        let infos = this.$route.query.id;
+        console.log(infos);
+        if (infos == "aboutIntro") {
+          this.nowIndex = 0;
+        }
+        if (infos == "aboutVideo") {
+          this.nowIndex = 1;
+        }
+        if (infos == "aboutAptitude") {
+          this.nowIndex = 2;
+        }
+      },
       // 大视频遮罩效果
       handleClose() {
         this.dialogVisible = false
@@ -348,7 +395,7 @@
         this.dialogVisible = true
       },
       // *********CPE*************
-       handleCloseCPE() {
+      handleCloseCPE() {
         this.dialogVisibleCPE = false
         // 关闭弹出框时 视频关闭播放
         const video = document.getElementById('videoCPE')
@@ -358,7 +405,7 @@
         this.dialogVisibleCPE = true
       },
       // *********管廊*************
-       handleCloseGL() {
+      handleCloseGL() {
         this.dialogVisibleGL = false
         // 关闭弹出框时 视频关闭播放
         const video = document.getElementById('videoGL')
@@ -367,8 +414,8 @@
       handleVideoGL() {
         this.dialogVisibleGL = true
       },
-       // *********智慧燃气解决方案***********
-       handleCloseGAS() {
+      // *********智慧燃气解决方案***********
+      handleCloseGAS() {
         this.dialogVisibleGAS = false
         // 关闭弹出框时 视频关闭播放
         const video = document.getElementById('videoGAS')
@@ -376,11 +423,6 @@
       },
       handleVideoGAS() {
         this.dialogVisibleGAS = true
-      },
-
-      addItem: function (index, active_text) {
-        this.nowIndex = index;
-        this.active_text = active_text;
       },
       // 吸顶效果
       initHeight() {
@@ -428,23 +470,23 @@
 
       },
       // **************************请求about--荣誉资质（第一页）******************************
-      request_honor_first() {
-        this.$axios
-          .get("/about/getPageByType", {
-            params: {
-              //每页显示条数 
-              limit: 12,
-              // 显示页数
-              page: 1,
-              type: "荣誉资质"
-            }
-          })
-          .then(first => {
-            this.first = first.data.data;
-          })
-        // .catch(error => {
-        // });
-      },
+      // request_honor_first() {
+      //   this.$axios
+      //     .get("/about/getPageByType", {
+      //       params: {
+      //         //每页显示条数 
+      //         limit: 9,
+      //         // 显示页数
+      //         page: 1,
+      //         type: "荣誉资质"
+      //       }
+      //     })
+      //     .then(first => {
+      //       this.first = first.data.data;
+      //     })
+      //   // .catch(error => {
+      //   // });
+      // },
       // **************************请求about--荣誉资质（第二页）******************************
       request_honor_second() {
         this.$axios
@@ -543,6 +585,11 @@
 
 <style lang="less" scope>
   #about {
+    .abouted {
+      .el-tabs__header {
+        top: 0;
+      }
+    }
 
     // 吸顶
     .is_fixed {
@@ -555,27 +602,31 @@
 
     }
 
-// 遮罩
-// 去除白色背景
- .el-dialog, .el-pager li {
-    background:none;
-}
-// 去除关闭按钮 
-.el-icon-close:before {
-    // content: "\e6db";
-}
-// 去除水平线
-.el-divider--horizontal{
-  display: none;
-}
+    // 遮罩
+    // 去除白色背景
+    .el-dialog,
+    .el-pager li {
+      background: none;
+    }
+
+    // 去除关闭按钮 
+    .el-icon-close:before {
+      // content: "e6db";
+    }
+
+    // 去除水平线
+    .el-divider--horizontal {
+      display: none;
+    }
+
     .videoSmall {
-     width: 68%;
-    margin-left: 16%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 50px;
+      width: 68%;
+      margin-left: 16%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      justify-content: space-evenly;
+      margin-bottom: 50px;
     }
 
     h3 {
@@ -584,17 +635,22 @@
 
     .el-tabs__header {
       position: relative;
-      margin: 0;
+      /* margin: 0; */
+      z-index: 999;
+      // top: 1220px;
+      display: none;
     }
 
     .site {
       top: 77%;
     }
+
     .videoCPE,
     .videoGL,
-    .videoGAS{
+    .videoGAS {
       width: 324PX;
     }
+
     .videobox {
       width: 100%;
       cursor: pointer;
@@ -819,7 +875,7 @@
       p {
         color: #73716e;
         font-size: 16px;
-        text-align: center;
+        text-align: left;
         line-height: 38px;
       }
 
@@ -965,7 +1021,10 @@
     .honor-list {
       position: relative;
       z-index: 0;
+      height: 1080px;
+      margin-top: 30px;
     }
+
 
     .honor-list li {
       width: 25%;
@@ -977,8 +1036,8 @@
 
     .honor-list li img {
       display: block;
-      max-width: 90%;
-      height: 304px;
+      max-width: 100%;
+      height: 270px;
       margin: auto;
       transition: 0.34s;
     }
@@ -989,6 +1048,22 @@
       -moz-transform: translateY(-5px);
     }
 
+    .honor-list-first {
+      li {
+        padding: 38px 45px;
+
+        img {
+          max-width: 120%;
+        }
+      }
+
+    }
+.honor-list-first:nth-child(n+9){
+  li{
+padding: 38px 20px !important;
+  }
+  
+}
     .wrapper {
       width: 1200px;
       margin: auto;
@@ -1019,9 +1094,9 @@
 
     // 分页按钮
     .pages {
-      margin-top: 28px;
+      margin-top: -85px !important;
       text-align: center;
-      margin-bottom: 200px;
+      margin-bottom: 50px;
     }
 
     .pages a {

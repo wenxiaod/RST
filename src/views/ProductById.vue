@@ -1,13 +1,14 @@
 <template>
-  <div id="productbyid">
-  <onlineQQ />
-  <Chat />
-   <div class="view-box">
+    <div id="productbyid">
+        <onlineQQ />
+        <Chat />
+        <div class="view-box">
             <div class="positewr wrapper clearfix">
-                <span>当前位置：</span><a href="/">首页 ></a><a href="./#/product">硬件产品 ></a><a href="javascript:;">1100型路由器</a>
+                <span>当前位置：</span><a href="/">首页 ></a><a href="./#/product">硬件产品 ></a><a
+                    href="javascript:;">1100型路由器</a>
             </div>
-        
-      <div class="product-view">
+
+            <div class="product-view">
                 <div class="producttopd wrapper clearfix">
                     <figure><img :src="productImg.imagePath" alt="" /></figure>
                     <div class="prote">
@@ -15,7 +16,7 @@
                         <p>{{productbyid[0].productDetailsContent}}</p>
                     </div>
                 </div>
-               <div class="productho">
+                <div class="productho">
                     <ul class="pro-list wrapper clearfix">
                         <li><a href="javascript:;">产品概述</a></li>
                         <li><a href="javascript:;">组网方案拓扑图</a></li>
@@ -24,6 +25,7 @@
                         <li><a href="javascript:;">应用案例</a></li>
                     </ul>
                 </div>
+                <!-- 产品概述 -->
                 <div class="pro-info" id="describe">
                     <div class="loadtitle">
                         <h3>{{productbyid[0].productDetailsType}}</h3>
@@ -35,7 +37,8 @@
 
                     </div>
                 </div>
-                <div class="pro-info" id="spectrum">
+                <!-- 产品优势 -->
+                <div v-if="productbyid[1].productDetailsContent" class="pro-info" id="spectrum">
                     <div class="loadtitle">
                         <h3>{{productbyid[1].productDetailsType}}</h3>
                     </div>
@@ -56,29 +59,29 @@
                                 <div class="proimgs"><img :src="productbyid[2].productDetailsPicLink" alt="" /></div>
                             </div>
                         </li>
-                        <li>
+                        <li v-if="productbyid[3].productDetailsTitle">
                             <!-- 2、高可靠、无间断的网络通讯" -->
                             <div class="protexss clearfix">
                                 <div class="prole">
                                     <h3> {{productbyid[3].productDetailsTitle}}</h3>
                                     <p>{{productbyid[3].productDetailsContent}}</p>
-                                   
+
                                 </div>
                                 <div class="proimgs"><img :src="productbyid[3].productDetailsPicLink" alt="" /></div>
                             </div>
                         </li>
-                        <li>
+                        <li v-if="productbyid[4].productDetailsTitle">
                             <!-- 3、运维便捷，管理高效 -->
                             <div class="protexss clearfix">
                                 <div class="prole">
                                     <h3>{{productbyid[4].productDetailsTitle}}</h3>
                                     <p>{{productbyid[4].productDetailsContent}}</p>
-                                   
+
                                 </div>
                                 <div class="proimgs"><img :src="productbyid[4].productDetailsPicLink" alt="" /></div>
                             </div>
                         </li>
-                        <li>
+                        <li v-if="productbyid[5].productDetailsTitle">
                             <!--  -->
                             <div class="protexss clearfix">
                                 <div class="prole">
@@ -110,378 +113,385 @@
                     <div class="preinfo"><a href="./#/KT100">下一篇：RST-KT100工业路由器</a></div>
                 </div>
             </div>
-        
+
+        </div>
+
+
+
     </div>
 
 
 
-  </div>
 
-
-  
- 
 </template>
 
 <script>
-import onlineQQ from "../components/onlineQQ"
-import Chat from "../components/Chat"
-export default {
-  name: "productbyid",
+    import onlineQQ from "../components/onlineQQ"
+    import Chat from "../components/Chat"
+    export default {
+        name: "productbyid",
 
-data(){
-      return {
-       productbyid:[],
-       productImg:[]
-      }
-    },
-  
-    components:{
-      onlineQQ,
-      Chat
-    },
-   created() {
-      // => 请求数据
-      this.request_productbyid();
-      this.request_productImg();
-      
-      
-    },
- 
+        data() {
+            return {
+                productbyid: [],
+                productImg: []
+            }
+        },
 
-    methods:{
- // **************************--硬件产品---详情数据******************************
-   request_productbyid(){
-        let id = this.$route.query.id;
-       this.$axios
-          .get("/productDetails/getProductDetails", {
-            params: {
-              id: id
-            }
-          })
-          .then(productbyid => {
-            this.productbyid = productbyid.data.data;
-            console.log(productbyid);
-          })
-         
-      },   
-    // **************************--硬件产品---详情数据---图片******************************
-     request_productImg(){
-        let id = this.$route.query.id;
-       this.$axios
-          .get("/index/getById", {
-            params: {
-              id: id
-            }
-          })
-          .then(productImg => {
-            this.productImg = productImg.data.data;
-          })
-         
-      },   
-}
-}
+        components: {
+            onlineQQ,
+            Chat
+        },
+        created() {
+            // => 请求数据
+            this.request_productbyid();
+            this.request_productImg();
+
+
+        },
+        methods: {
+            // **************************--硬件产品---详情数据******************************
+            request_productbyid() {
+                let id = this.$route.query.id;
+                this.$axios
+                    .get("/productDetails/getProductDetails", {
+                        params: {
+                            id: id
+                        }
+                    })
+                    .then(productbyid => {
+                        this.productbyid = productbyid.data.data;
+
+                    })
+
+            },
+            // **************************--硬件产品---详情数据---图片******************************
+            request_productImg() {
+                let id = this.$route.query.id;
+                this.$axios
+                    .get("/index/getById", {
+                        params: {
+                            id: id
+                        }
+                    })
+                    .then(productImg => {
+                        this.productImg = productImg.data.data;
+                    })
+
+            },
+        }
+    }
 </script>
 
 <style lang="less" scope>
-#productbyid{
-width: 68%;
-padding-top: 71px;
-margin:0 auto; 
-.view-box {
-    background: url(../../public/images/view.jpg) repeat-x;
-.positewr{
+    #productbyid {
+        width: 68%;
+        padding-top: 71px;
+        margin: 0 auto;
 
-    text-align: left;
-    padding-top: 60px;
-}
-.positewr span,
-.positewr a {
-    display: inline-block;
-    color: #888888;
-    font-size: 16px;
-}
+        .view-box {
+            background: url(../../public/images/view.jpg) repeat-x;
 
-.positewr a {
-    transition: 0.4s;
-    margin-right: 5px;
-}
+            .positewr {
 
-.positewr a:hover,
-.positewr a.on {
-    color: #f08605;
-}
+                text-align: left;
+                padding-top: 60px;
+            }
 
-.positewr span {
-    padding-left: 21px;
-    position: relative;
-    background: url(../../public/images/now.png) 1px center no-repeat;
-}
-.product-view {
-    padding-top: 110px;
-}
+            .positewr span,
+            .positewr a {
+                display: inline-block;
+                color: #888888;
+                font-size: 16px;
+            }
 
-.producttopd figure {
-    display: block;
-    width: 370px;
-    float: left;
-    margin-left: 20px;
-    overflow: hidden;
-}
+            .positewr a {
+                transition: 0.4s;
+                margin-right: 5px;
+            }
 
-.producttopd figure img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
+            .positewr a:hover,
+            .positewr a.on {
+                color: #f08605;
+            }
 
-.prote {
-    width: 693px;
-    float: right;
-    margin-right: 20px;
-    padding-top: 78px;
-}
+            .positewr span {
+                padding-left: 21px;
+                position: relative;
+                background: url(../../public/images/now.png) 1px center no-repeat;
+            }
 
-.prote h3 {
-    color: #225599;
-    font-size: 25px;
-    margin-bottom: 34px;
-}
+            .product-view {
+                padding-top: 110px;
+            }
 
-.prote p {
-    color: #333333;
-    font-size: 16px;
-    line-height: 2.2;
-}
+            .producttopd figure {
+                display: block;
+                width: 370px;
+                float: left;
+                margin-left: 20px;
+                overflow: hidden;
+            }
 
-.productho {
-    margin-top: 102px;
-}
+            .producttopd figure img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
 
-.pro-list {
-    background: url(../../public/images/newbg.png) repeat;
-}
+            .prote {
+                width: 693px;
+                float: right;
+                margin-right: 20px;
+                padding-top: 78px;
+            }
 
-.pro-list li {
-    float: left;
-    position: relative;
-}
+            .prote h3 {
+                color: #225599;
+                font-size: 25px;
+                margin-bottom: 34px;
+            }
 
-.pro-list li:nth-child(1) {
-    margin-left: 20px;
-}
+            .prote p {
+                color: #333333;
+                font-size: 16px;
+                line-height: 2.2;
+            }
 
-.pro-list li a:after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    border: 1px solid #065fb7;
-    position: absolute;
-    left: 0;
-    top: 0;
-    box-sizing: border-box;
-    opacity: 0;
-    transition: 0.43s;
-    transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    visibility: hidden;
-}
+            .productho {
+                margin-top: 102px;
+            }
 
-.pro-list li a {
-    display: block;
-    width: 154px;
-    position: relative;
-    line-height: 50px;
-    color: #333333;
-    font-size: 16px;
-    text-align: center;
-    position: relative;
-    transition: 0.45s;
-    z-index: 5;
-}
+            .pro-list {
+                background: url(../../public/images/newbg.png) repeat;
+            }
 
-.pro-list li:before {
-    content: "";
-    width: 1px;
-    height: 25px;
-    position: absolute;
-    right: 0;
-    background: url(../../public/images/line2.png) center no-repeat;
-    top: 16px;
-    transition: 0.34s;
-}
+            .pro-list li {
+                float: left;
+                position: relative;
+            }
 
-.pro-list li.on:before,
-.pro-list li:hover:before {
-    background: none;
-}
+            .pro-list li:nth-child(1) {
+                margin-left: 20px;
+            }
 
-.pro-list li.on a,
-.pro-list li:hover a {
-    background: #fff;
-}
+            .pro-list li a:after {
+                content: "";
+                width: 100%;
+                height: 100%;
+                border: 1px solid #065fb7;
+                position: absolute;
+                left: 0;
+                top: 0;
+                box-sizing: border-box;
+                opacity: 0;
+                transition: 0.43s;
+                transform: scale(0.5);
+                -webkit-transform: scale(0.5);
+                -moz-transform: scale(0.5);
+                visibility: hidden;
+            }
 
-.pro-list li.on a:after,
-.pro-list li:hover a:after {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-}
+            .pro-list li a {
+                display: block;
+                width: 154px;
+                position: relative;
+                line-height: 50px;
+                color: #333333;
+                font-size: 16px;
+                text-align: center;
+                position: relative;
+                transition: 0.45s;
+                z-index: 5;
+            }
 
-.prosilist .loadtitle {
-    margin-bottom: 0;
-}
+            .pro-list li:before {
+                content: "";
+                width: 1px;
+                height: 25px;
+                position: absolute;
+                right: 0;
+                background: url(../../public/images/line2.png) center no-repeat;
+                top: 16px;
+                transition: 0.34s;
+            }
 
-.pro-info {
-    width: 1180px;
-    margin: auto;
-    padding-top: 60px;
-}
+            .pro-list li.on:before,
+            .pro-list li:hover:before {
+                background: none;
+            }
 
-#parameter {
-    padding-top: 40px;
-}
+            .pro-list li.on a,
+            .pro-list li:hover a {
+                background: #fff;
+            }
 
-#case {
-    padding-top: 40px;
-}
+            .pro-list li.on a:after,
+            .pro-list li:hover a:after {
+                opacity: 1;
+                visibility: visible;
+                transform: scale(1);
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+            }
 
-.prosilist {
-    padding-top: 50px;
-}
+            .prosilist .loadtitle {
+                margin-bottom: 0;
+            }
 
-.prole {
-    float: left;
-    width: 680px;
-}
+            .pro-info {
+                width: 1180px;
+                margin: auto;
+                padding-top: 60px;
+            }
 
-.prole p {
-    color: #333333;
-    font-size: 18px;
-    line-height: 2.2;
-        text-align: left;
-}
+            #parameter {
+                padding-top: 40px;
+            }
 
-.proimgs {
-    float: right;
-}
+            #case {
+                padding-top: 40px;
+            }
 
-.proimgs img {
-    display: block;
-}
+            .prosilist {
+                padding-top: 50px;
+                padding-left: 50px;
+            }
 
-.pross {
-    text-align: center;
-}
+            .prole {
+                float: left;
+                width: 680px;
+            }
 
-.pross img {
-    max-width: 100%;
-    margin: auto;
-}
+            .prole p {
+                color: #333333;
+                font-size: 18px;
+                line-height: 2.2;
+                text-align: left;
+            }
 
-.prolis li {
-    padding: 40px 0;
-}
+            .proimgs {
+                float: right;
+            }
 
-.prolis li .protexss {
-    width: 1160px;
-    margin: auto;
-}
+            .proimgs img {
+                display: block;
+                width: 321px;
+                height: 211px;
+            }
 
-.prolis li .protexss .prole {
-    padding-top: 10px;
-    width: 600px;
-}
+            .pross {
+                text-align: center;
+            }
 
-.prolis li .protexss .prole h3 {
-    color: #333333;
-    font-size: 22px;
-    margin-bottom: 30px;
-}
+            .pross img {
+                max-width: 100%;
+                margin: auto;
+            }
 
-.prolis li:nth-child(2n+2) {
-    background: #f5f5f5;
-}
+            .prolis li {
+                padding: 40px 0;
+            }
 
-.prolis li:nth-child(2n+2) .protexss .prole {
-    float: right;
-}
+            .prolis li .protexss {
+                width: 1160px;
+                margin: auto;
+            }
 
-.prolis li:nth-child(2n+2) .proimgs {
-    float: left;
-}   
-}
-.posite .prevpage {
-    margin-top: 58px;
-}
-.loadtitle {
-    padding-bottom: 16px;
-    border-bottom: 1px solid #eeeeee;
-    position: relative;
-    margin-bottom: 48px;
-}
+            .prolis li .protexss .prole {
+                padding-top: 10px;
+                width: 600px;
+            }
 
-.loadtitle h3 {
-    color: #444444;
-    font-size: 25px;
-    font-weight: normal;
-    text-align: left;
-}
+            .prolis li .protexss .prole h3 {
+                color: #333333;
+                font-size: 22px;
+                margin-bottom: 30px;
+            }
 
-.loadtitle h3:before {
-    content: "";
-    width: 25px;
-    height: 3px;
-    background: #f7a753;
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-}
-.words {
-    border-bottom: 1px solid #eeeeee;
-    padding-left: 20px;
-    padding-right: 20px;
-}
+            .prolis li:nth-child(2n+2) {
+                background: #f5f5f5;
+            }
 
-.words span {
-    float: left;
-    color: #333333;
-    font-size: 16px;
-}
+            .prolis li:nth-child(2n+2) .protexss .prole {
+                float: right;
+            }
 
-.words a {
-    display: block;
-    width: 102px;
-    height: 33px;
-    background: url(../../public/images/back.png) center no-repeat;
-    float: right;
-    line-height: 28px;
-    text-align: center;
-    color: #fff;
-    font-size: 12px;
-}
+            .prolis li:nth-child(2n+2) .proimgs {
+                float: left;
+            }
+        }
 
-.prebnext {
-    padding: 15px 20px 0;
-    text-align: left;
-}
+        .posite .prevpage {
+            margin-top: 58px;
+        }
 
-.preinfo {
-    margin-bottom: 16px;
-}
+        .loadtitle {
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eeeeee;
+            position: relative;
+            margin-bottom: 48px;
+        }
 
-.preinfo a {
-    display: inline-block;
-    color: #333333;
-    font-size: 16px;
-    transition: 0.4s;
-}
+        .loadtitle h3 {
+            color: #444444;
+            font-size: 25px;
+            font-weight: normal;
+            text-align: left;
+        }
 
-.preinfo a:hover {
-    color: #225599;
-}
-}
+        .loadtitle h3:before {
+            content: "";
+            width: 25px;
+            height: 3px;
+            background: #f7a753;
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+        }
 
+        .words {
+            border-bottom: 1px solid #eeeeee;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .words span {
+            float: left;
+            color: #333333;
+            font-size: 16px;
+        }
+
+        .words a {
+            display: block;
+            width: 102px;
+            height: 33px;
+            background: url(../../public/images/back.png) center no-repeat;
+            float: right;
+            line-height: 28px;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .prebnext {
+            padding: 15px 20px 0;
+            text-align: left;
+        }
+
+        .preinfo {
+            margin-bottom: 16px;
+        }
+
+        .preinfo a {
+            display: inline-block;
+            color: #333333;
+            font-size: 16px;
+            transition: 0.4s;
+        }
+
+        .preinfo a:hover {
+            color: #225599;
+        }
+    }
 </style>

@@ -2,10 +2,10 @@
   <div id="home">
     <!-- <transform style="z-index:3;position:relative;top:436px;"/> -->
     <swiper class="swiper" :options="swiperOption" ref="mySwiper" v-if="banner.length>0">
-      <!--**********轮播图********** -->
+
       <swiper-slide v-for="(item,index) in banner" :key="index" class="lastChild">
         <img :src="item.imagePath" />
-        <div class="textList">
+        <div class="textList animated zoomIn">
           <h3>{{item.imageTitle}}</h3>
           <small>{{item.imageTitleEnglish}}</small>
           <p>{{item.imageContent}}</p>
@@ -14,19 +14,20 @@
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
-      <div class="swiper-pagination" slot="pagination" style="bottom:100px;"></div>
+      <div class="swiper-pagination" slot="pagination" style="bottom:25px;"></div>
     </swiper>
+    <!-- <img src="../../public/images/bannGif1.gif" alt="" srcset=""> -->
 
     <!-- ********************解决方案****************** -->
     <section class="hardwaare inner">
       <div class="home-title clearfix">
         <div class="commonleft">
-          <strong class="solutionStrong">解决方案</strong>
+          <strong class="solutionStrong">智慧管网解决方案</strong>
           <small class="solutionSmall">SOLUTIONS</small>
         </div>
       </div>
 
-      <div class="solutionList" style="display:flex;margin-left: -60px;">
+      <div class="solutionList " style="display:flex;margin-left: -60px;">
         <ul class="solutionli clearfix" v-for="(item,index) in solution" :key="index">
           <li>
             <a href="javascript:;">
@@ -62,41 +63,36 @@
           <small>INTELLIGENT HARDWARE</small>
         </div>
       </div>
-      <div class="homeList">
-        <div class="productList" v-if="product.length>0">
-          <swiper class="swiperOptionpProduct" :options="swiperOptionpProduct" ref="mySwiper" id="swiper_container">
-            <!-- slides -->
-            <swiper-slide v-for="(item,index) in product" :key="index">
-              <ul class="productItem" @mouseenter="enter(index)">
-                <li>
-                  <img :src="item.imagePath" />
-                </li>
-              </ul>
+      <div class="homeList ">
+        <div class="productList">
+          <ul class="productItem" v-for="(item,index) in product" :key="index" @mouseenter="enter(index)">
 
-            </swiper-slide>
-            <!-- <div class="swiper-pagination" slot="pagination"></div> -->
-          </swiper>
-
+            <li>
+              <a :href="'/#/productbyid?id='+item.imageId"><img :src="item.imagePath"></a>
+            </li>
+          </ul>
+          <div class="productListSel">
+            <img :src="productSel.imagePath" alt="">
+          </div>
           <div class="productFooter">
-            <ul class="presentIndex" v-for="(item,index) in product" :key="index">
-              <li>
-                <strong v-show="presentIndex==index">{{item.imageTitle}}</strong>
-                <p v-show="presentIndex==index">{{item.imageDescription}}</p>
-              </li>
-            </ul>
+            <h3 class="productListSelTitle">{{productSel.imageTitle}}</h3>
+            <div id="productListSelText" class="productListSelText  interins">
+              <h5>产品概述</h5>
+              <span class="">{{productSel.imageDescription}}</span>
+            </div>
           </div>
         </div>
       </div>
       <div>
-        <a href="./#/product" class="homeReadmore" style="margin-top: -5%;">READ MORE</a>
+        <a href="./#/product" class="homeReadmore" style="margin-top: 5%;">READ MORE</a>
       </div>
     </section>
 
-    
+
     <!-- *********************关于我们********************* -->
-    <div class="aboutUs">
+    <div class="aboutUs ">
       <!-- 背景图 -->
-      <img src="http://192.168.1.115:8081/picture/homePic/banner2.jpg" class="aboutUsBg" />
+      <img src="../../public/images/homeAboutUsBack.jpg" class="aboutUsBg" />
       <!-- 内容盒子 -->
       <div class="aboutUsContent" v-for="(item,index) in about" :key="index">
         <div class="aboutUsPic">
@@ -114,7 +110,7 @@
     </div>
 
     <!-- 新闻 -->
-    <div class="homeNews hardwaare inner">
+    <div class="homeNews hardwaare inner ">
       <div class="home-title clearfix">
         <div class="commonleft">
           <strong class="homeNewsStrong">新闻中心</strong>
@@ -217,33 +213,12 @@
             el: ".swiper-pagination"
           }
         },
-        // 配置硬件产品轮播图参数
-        swiperOptionpProduct: {
-          autoplayDisableOnInteraction: true,
-          effect: "coverflow",
-          grabCursor: true,
-          autoplay: {
-            delay: 2000
-          },
-          centeredSlides: true,
-          slidesPerView: "auto",
-          loop: true,
-          coverflowEffect: {
-            rotate: 10,
-            stretch: 0,
-            depth: 1,
-            modifier: 1,
-            slideShadows: false
-          },
 
-          pagination: {
-            el: ".swiper-pagination"
-          }
-        },
         // 接收banner
         banner: [],
         // 接收product
         product: [],
+        productId: [],
         // 接收solution
         solution: [],
         // 接收about
@@ -253,7 +228,7 @@
         // 接收partner
         partner: [],
         //硬件产品当前悬浮下标
-        presentIndex: 0
+        productSel: []
       };
     },
     created() {
@@ -296,20 +271,34 @@
           .then(product => {
             this.product = product.data.data;
 
+            this.productId = product.data.data.imageId;
+
+            this.productSel = this.product[0]
           })
         // .catch(error => {
         // });
       },
+
       // **************************product--硬件产品--获取当前标签下标******************************
       enter(index) {
-        this.presentIndex = index;
-        /*鼠标移入停止轮播，鼠标离开 继续轮播*/
-        var comtainer = document.getElementById('swiper_container');
-        comtainer.onmouseenter = function () {
-          swiper.stopAutoplay();
-        };
-        comtainer.onmouseleave = function () {
-          swiper.startAutoplay();
+        // let arr=document.getElementById("productListSelText")  
+        if (index == 0) {
+
+          this.productSel = this.product[0]
+          // arr.classList.add("jackInTheBox");
+        }
+        if (index == 1) {
+          // arr.classList.add("jackInTheBox");
+          this.productSel = this.product[1]
+
+        }
+        if (index == 2) {
+          // arr.classList.add("jackInTheBox");
+          this.productSel = this.product[2]
+        }
+        if (index == 3) {
+          // arr.classList.add("jackInTheBox");
+          this.productSel = this.product[3]
         }
       },
       // **************************请求solution--解决方案******************************
@@ -455,7 +444,7 @@
         }
       }
 
-  
+
     }
 
     // --轮播图样式结束
@@ -491,7 +480,7 @@
           color: #3a3a39;
           font-size: 30px;
           line-height: 1;
-          letter-spacing: 40px;
+          letter-spacing: 8px;
           margin-bottom: 24px;
           font-weight: normal;
           text-align: left;
@@ -524,34 +513,28 @@
       }
 
       .productList {
-        height: 630px;
+        height: 700px;
 
         .productListSel {
           width: 300px;
-          border-left: 10px solid #dcdcdc;
-          margin-left: 4.2%;
-          position: relative;
-          top: -80%;
-          border-top: 1px solid #dcdcdc;
-          border-right: 1px solid #dcdcdc;
+          height: 440px;
           background: #ffffff;
+          margin-left: 2.2%;
+          border: 1px solid #dcdcdc;
+          position: relative;
+          display: flex;
+          align-items: center;
+          position: relative;
+          right: 58%;
 
           img {
-            margin: auto;
             width: 300px;
-            height: 320px;
-            overflow: hidden;
-          }
-
-          strong {
-            display: block;
-            text-align: center;
           }
         }
 
         .productItem {
           position: relative;
-          top: 26%;
+          top: 25%;
           left: 38%;
 
           li {
@@ -563,11 +546,6 @@
             border: 1px solid #dcdcdc;
             margin: 0 8px;
             z-index: 2;
-
-            &:hover {
-              transition: 0.75s;
-              transform: scale(1.3);
-            }
 
             img {
               width: 170px;
@@ -587,63 +565,6 @@
           }
         }
 
-        .presentIndex {
-          overflow: hidden;
-          position: relative;
-          text-align: left;
-          top: 40%;
-          width: 86%;
-          left: 13%;
-
-          strong {
-            display: block;
-            color: #fff;
-            font-size: 18px;
-            font-weight: normal;
-            line-height: 1;
-            margin-bottom: 8px;
-            margin-left: 28%;
-          }
-
-          p {
-            color: #fcfcf8;
-            font-size: 14px;
-            line-height: 2;
-            width: 80%;
-            height: 90px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-
-          b {
-
-            display: block;
-            width: 86px;
-            height: 22px;
-            text-align: center;
-            line-height: 22px;
-            color: #fff;
-            font-size: 12px;
-            transition: 0.45s;
-            // text-transform: uppercase;
-            border: 1px solid #fff;
-            position: absolute;
-            right: 0;
-            bottom: 0;
-
-            &:before {
-              content: "";
-              width: 100px;
-              height: 5px;
-              background: #f08605;
-              position: absolute;
-              left: -800%;
-              bottom: 0px;
-            }
-
-          }
-        }
-
         .productFooter {
           position: relative;
           width: 100%;
@@ -651,8 +572,184 @@
           height: 270px;
           top: -10%;
           z-index: -1;
+
+          .productListSelTitle {
+            color: #ffffff;
+            padding-top: 7%;
+            width: 28%;
+            display: flex;
+            justify-content: center;
+            font-family: "微软雅黑";
+            font-size: 23px;
+          }
+
+          .interins:before {
+            content: "";
+            width: 34px;
+            height: 4px;
+            background: #f08605;
+            position: absolute;
+            left: 40%;
+            bottom: 5%;
+          }
+
+          .productListSelText {
+            width: 51%;
+            margin-left: 40%;
+            margin-top: -2%;
+            color: #ffffff;
+
+            h5 {
+              display: block;
+              color: #fff;
+              font-size: 18px;
+              font-weight: normal;
+              line-height: 1;
+              margin-bottom: 18px;
+            }
+
+            span {
+              color: #fcfcf8;
+              font-size: 14px;
+              line-height: 2;
+              width: 436px;
+              overflow: hidden;
+              font-family: "微软雅黑";
+            }
+          }
         }
       }
+
+      // .productList {
+      //   height: 630px;
+
+      //   .productListSel {
+      //     width: 300px;
+      //     border-left: 10px solid #dcdcdc;
+      //     margin-left: 4.2%;
+      //     position: relative;
+      //     top: -80%;
+      //     border-top: 1px solid #dcdcdc;
+      //     border-right: 1px solid #dcdcdc;
+      //     background: #ffffff;
+
+      //     img {
+      //       margin: auto;
+      //       width: 300px;
+      //       height: 320px;
+      //       overflow: hidden;
+      //     }
+
+      //     strong {
+      //       display: block;
+      //       text-align: center;
+      //     }
+      //   }
+
+      //   .productItem {
+      //     position: relative;
+      //     top: 26%;
+      //     left: 38%;
+
+      //     li {
+      //       box-sizing: border-box;
+      //       float: left;
+      //       width: 180px;
+      //       height: 260px;
+      //       background: #ffffff;
+      //       border: 1px solid #dcdcdc;
+      //       margin: 0 8px;
+      //       z-index: 2;
+
+      //       &:hover {
+      //         transition: 0.75s;
+      //         transform: scale(1.3);
+      //       }
+
+      //       img {
+      //         width: 170px;
+      //         margin-top: 33%;
+      //       }
+
+      //       &:hover {
+      //         cursor: pointer;
+      //         border: 3px solid #6388cf;
+      //         transition: 0.75s;
+
+      //         img {
+      //           transition: 0.75s;
+      //           transform: translateY(-10px);
+      //         }
+      //       }
+      //     }
+      //   }
+
+      //   .presentIndex {
+      //     overflow: hidden;
+      //     position: relative;
+      //     text-align: left;
+      //     top: 40%;
+      //     width: 86%;
+      //     left: 13%;
+
+      //     strong {
+      //       display: block;
+      //       color: #fff;
+      //       font-size: 18px;
+      //       font-weight: normal;
+      //       line-height: 1;
+      //       margin-bottom: 8px;
+      //       margin-left: 28%;
+      //     }
+
+      //     p {
+      //       color: #fcfcf8;
+      //       font-size: 14px;
+      //       line-height: 2;
+      //       width: 80%;
+      //       height: 90px;
+      //       overflow: hidden;
+      //       text-overflow: ellipsis;
+      //     }
+
+      //     b {
+
+      //       display: block;
+      //       width: 86px;
+      //       height: 22px;
+      //       text-align: center;
+      //       line-height: 22px;
+      //       color: #fff;
+      //       font-size: 12px;
+      //       transition: 0.45s;
+      //       // text-transform: uppercase;
+      //       border: 1px solid #fff;
+      //       position: absolute;
+      //       right: 0;
+      //       bottom: 0;
+
+      //       &:before {
+      //         content: "";
+      //         width: 100px;
+      //         height: 5px;
+      //         background: #f08605;
+      //         position: absolute;
+      //         left: -800%;
+      //         bottom: 0px;
+      //       }
+
+      //     }
+      //   }
+
+      //   .productFooter {
+      //     position: relative;
+      //     width: 100%;
+      //     background: #6388cf;
+      //     height: 270px;
+      //     top: -10%;
+      //     z-index: -1;
+      //   }
+      // }
 
       //productList
       .solutionStrong {

@@ -1,80 +1,67 @@
 <template>
     <div id="footer">
-         <a href="/" class="gohome"><img src="../../public/images/flogo.png" alt=""></a>
+        <a href="/" class="gohome"><img src="../../public/images/flogo.png" alt=""></a>
         <div class="footer-list">
-        <ul>
-            <li class="list-first">
-                <router-link to="/product" @click="changeColor()">硬件产品</router-link>
-                <ul class="list-second">
-                    <li>
-                        <router-link to="/RST1100">1100型路由器</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/KT100">KT100型路由器</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/CPE">室内CPE</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/LED">便携式应急灯</router-link>
-                    </li>
-                </ul>
-            </li>
-            <li class="list-first">
-                <router-link to="/solution"  @click="changeColor()">解决方案</router-link>
-                <ul class="list-second">
-                    <li>
-                        <router-link to="/solution">数字管廊解决方案</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/solution">智慧燃气解决方案</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/solution">人员定位系统</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/solution">智能巡检系统</router-link>
-                    </li>
-                </ul>
-            </li>
-            <li class="list-first">
-                <router-link to="/">服务支持</router-link>
-                <ul class="list-second">
-                    <li>
-                        <router-link to="/">常见问题</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/">资料下载</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/">学习中心</router-link>
-                    </li>
-                </ul>
-            </li>
-            <li class="list-first">
-                <router-link to="/about">关于我们</router-link>
-                <ul class="list-second">
-                    <li>
-                        <router-link to="/about">公司简介</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/about">企业文化</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/about">公司视频</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/about">企业荣誉</router-link>
-                    </li>
-                   
-                </ul>
-            </li>
-        </ul>
-        <div class="footer-serve">
-        <img  src="../../public/images/footer_wx.png" alt="">
-        <p>服务热线</p>
-        <h3>028-84175896</h3>
-        </div>
+            <ul>
+                <li class="list-first">
+                    <router-link to="/product" @click="changeColor()">硬件产品</router-link>
+                    <ul class="list-second">
+                        <li>
+                            <router-link to="/productbyid?id=14">1100型路由器</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/productbyid?id=15">KT100型路由器</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/productbyid?id=16">室内CPE</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/productbyid?id=17">便携式应急灯</router-link>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-first">
+                    <router-link to="/solution" @click="changeColor()">解决方案</router-link>
+                    <ul class="list-second">
+                        <li>
+                            <router-link to="/solution?id=pipe">数字管廊解决方案</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/solution?id=witGas">智慧燃气解决方案</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/solution?id=personnelLocation">人员定位系统</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/solution?id=witPolling">智能巡检系统</router-link>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="list-first">
+                    <router-link to="/about">关于我们</router-link>
+                    <ul class="list-second">
+                        <li>
+                            <router-link to="/about?id=aboutIntro">公司简介</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/about?id=aboutIntro">企业文化</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/about?id=aboutVideo">公司视频</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/about?id=aboutAptitude">企业荣誉</router-link>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+            <div class="footer-serve">
+                <img src="../../public/images/footer_wx.png" alt="">
+                <p>服务热线</p>
+                <h3>028-84175896</h3>
+            </div>
         </div>
         <div class="hr"></div>
         <div class="editers">
@@ -96,8 +83,8 @@
             };
         },
         methods: {
-            changeColor(){
-                document.bgColor="orange"
+            changeColor() {
+                document.bgColor = "orange"
             }
 
         }
@@ -116,22 +103,25 @@
     }
 
     #footer {
-        
-     .gohome{
-         float: left;
-        margin-right: 2%;
-        position: relative;
-        left: 15%;
-        top: 20%;
-      img{
-        width: 230px;
-        height: 95px;
-      }
+
+        .gohome {
+            float: left;
+            margin-right: 2%;
+            position: relative;
+            left: 15%;
+            top: 20%;
+
+            img {
+                width: 230px;
+                height: 95px;
+            }
         }
-        .footer-list{
+
+        .footer-list {
             position: relative;
             left: -16%;
         }
+
         width: 100%;
         height: 270px;
         background: #6388cf;
@@ -200,23 +190,27 @@
                 background: url("../../public/images/jian.png") left center no-repeat;
             }
         }
-    .footer-serve{
-        float: left;
-        position: relative;
-        top: 45px;
-        left: 32%;
-        img{
-            width: 152px;
-            height: 152px;
-        }
-        p,h3{
-            text-align: left;
-            padding-top: 5%;
+
+        .footer-serve {
+            float: left;
             position: relative;
-            left: 130%;
-            color: #ffffff;
-            top: -120px;
+            top: 45px;
+            left: 32%;
+
+            img {
+                width: 152px;
+                height: 152px;
+            }
+
+            p,
+            h3 {
+                text-align: left;
+                padding-top: 5%;
+                position: relative;
+                left: 130%;
+                color: #ffffff;
+                top: -120px;
+            }
         }
-    }
     }
 </style>

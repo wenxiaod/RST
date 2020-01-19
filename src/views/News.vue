@@ -2,7 +2,7 @@
   <div id="news">
     <onlineQQ />
     <Chat />
-    <img class="newsHead" src="../../public/images/newsHead.jpg" alt="">
+    <img class="newsHead " src="../../public/images/newsHead.jpg" alt="">
     <!-- Tab选项卡效果 -->
     <!-- 吸顶效果 -->
     <div class="newsTab" id="boxFixed" :class="{'is_fixed' : isFixed}">
@@ -11,17 +11,16 @@
     </div>
 
     <!-- 公司动态 -->
-    <div v-show="nowIndex === 0" class="content">
+    <div v-show="nowIndex === 0" class="content" id="newShow">
       <!-- 当前位置 -->
       <div class="productSite">
         <div class="productSiteText">
-          <span>当前位置：</span><a href="/">首页 ></a><a href="./#/news">新闻动态 ></a><a class="sel"
-            href="javascript:;">公司动态</a>
+          <span>当前位置：</span><a href="/">首页 ></a><a href="./#/news">新闻动态 ></a><a class="sel" href="javascript:;">公司动态</a>
         </div>
       </div>
-      
+
       <!-- 新闻动态内容区 -->
-      <div class="newsNews" v-for="(item,index) in news" :key="index" @click="selectItem(item)">
+      <div class="newsNews " v-for="(item,index) in news" :key="index" @click="selectItem(item)">
         <div class="newsNews-pic">
           <img :src="item.newsPicPath" alt="">
         </div>
@@ -41,16 +40,15 @@
 
 
     <!-- 行业资讯 -->
-    <div v-show="nowIndex === 1" class="content">
+    <div v-show="nowIndex === 1" class="content" id="infoShow">
       <!-- 当前位置 -->
       <div class="productSite">
         <div class="productSiteText">
-          <span>当前位置：</span><a href="/">首页 ></a><a href="./#/news">新闻动态 ></a><a class="sel"
-            href="javascript:;">行业资讯</a>
+          <span>当前位置：</span><a href="/">首页 ></a><a href="./#/news">新闻动态 ></a><a class="sel" href="javascript:;">行业资讯</a>
         </div>
       </div>
       <!-- 行业资讯内容区 -->
-      <div class="newsNews" v-for="(item,index) in messages" :key="index" @click="selectItem(item)">
+      <div class="newsNews " v-for="(item,index) in messages" :key="index" @click="selectItem(item)">
         <div class="newsNews-pic">
           <img :src="item.newsPicPath" alt="">
         </div>
@@ -63,7 +61,7 @@
           <span>{{item.addTime}}</span>
         </div>
       </div>
-    
+
     </div>
 
 
@@ -84,9 +82,9 @@
         active_text: '公司动态',
         text: ['公司动态', '行业资讯'],
         news: [],
-        messages:[],
+        messages: [],
         isFixed: false,
-        offsetTop:350,
+        offsetTop: 350,
       }
     },
     components: {
@@ -97,34 +95,46 @@
       // => 请求数据
       this.request_news();
       this.request_messages();
+      this.showInfo();
     },
-     mounted(){
-       // 监听屏幕滚动
-       window.addEventListener('scroll',this.initHeight);
-      this.$nextTick( () => {
-      this.offsetTop = document.querySelector('#boxFixed').offsetTop;
-      })
+    mounted() {
+      //  // 监听屏幕滚动（吸顶效果取消）
+      //  window.addEventListener('scroll',this.initHeight);
+      // this.$nextTick( () => {
+      // this.offsetTop = document.querySelector('#boxFixed').offsetTop;
+      // })
     },
     methods: {
       addItem: function (index, active_text) {
         this.nowIndex = index;
         this.active_text = active_text;
       },
+      //跳转至锚点 
+      showInfo() {
+        let id = this.$route.query.id;
+
+        if (id == "newShow") {
+          this.nowIndex = 0;
+        }
+        if (id == "infoShow") {
+          this.nowIndex = 1;
+        }
+      },
       // 吸顶效果
-      initHeight () {
+      initHeight() {
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
         this.isFixed = scrollTop > this.offsetTop ? true : false;
       },
-    selectItem(item){
-    let id=item.newsId;
-    this.$router.push({
-      path:"/newsbyid",
-      query:{
-        id:id
-      }
-    })
+      selectItem(item) {
+        let id = item.newsId;
+        this.$router.push({
+          path: "/newsbyid",
+          query: {
+            id: id
+          }
+        })
 
-  },
+      },
       // **************************请求news--公司动态******************************
       request_news() {
         this.$axios
@@ -141,11 +151,11 @@
           .then(news => {
             this.news = news.data.data;
           })
-          // .catch(error => {
-          // });
+        // .catch(error => {
+        // });
       },
       // **************************请求news--行业资讯******************************
-         request_messages() {
+      request_messages() {
         this.$axios
           .get("/news/getTypeAll", {
             params: {
@@ -160,28 +170,30 @@
           .then(messages => {
             this.messages = messages.data.data;
           })
-          // .catch(error => {
-          // });
+        // .catch(error => {
+        // });
       }
     },
     // 吸顶效果销毁
-    destroyed () {
-    window.removeEventListener('scroll', this.handleScroll);
+    destroyed() {
+      window.removeEventListener('scroll', this.handleScroll);
     }
   }
 </script>
 
 <style lang="less" scope>
   #news {
-// 吸顶
-.is_fixed{
-position:fixed !important;
-width: 100%;
-top:71px !important;
-background: rgba(0, 0, 0, 0.25) !important;
-left:0;
-z-index:2;
-}
+
+    // 吸顶
+    .is_fixed {
+      position: fixed !important;
+      width: 100%;
+      top: 71px !important;
+      background: rgba(0, 0, 0, 0.25) !important;
+      left: 0;
+      z-index: 2;
+    }
+
     //当前位置
     .productSite {
       padding: 0 0 10px;
@@ -192,7 +204,7 @@ z-index:2;
         margin: 0 auto;
 
         span {
-          margin-left: -80%;
+          margin-left: -120%;
         }
 
         a {
@@ -218,9 +230,10 @@ z-index:2;
     }
 
     .newsTab {
-        text-align: center;
-        position: relative;
-        top: -55px;
+      text-align: center;
+      position: relative;
+      top: -55px;
+
       a {
         display: inline-block;
         text-align: center;
@@ -231,6 +244,7 @@ z-index:2;
         color: #eeeeee;
         border-left: 1px solid #eeeeee;
         background: #6388cf;
+
         &:last-child {
           border-right: 1px solid #eeeeee;
         }
@@ -245,67 +259,76 @@ z-index:2;
         background: none;
       }
     }
-    .content{
+
+    .content {
       width: 68%;
       margin: 0 auto;
       position: relative;
-    .newsNews-pic{
-   img{
-       width: 191px;
-    height: 127px;
-    position: relative;
-    top: 65px;
-    left: 50%;
-  }
-}
+
+      .newsNews-pic {
+        img {
+          width: 191px;
+          height: 127px;
+          position: relative;
+          top: 65px;
+        }
+      }
     }
-.newsNews{
-    border-bottom: 1px solid #eeeeee;
-    height: 320px;
-    display: flex;
-    justify-content: center;
-  .newsNews-text{
-   position: relative;
-    top: 33px;
-    width: 888px;
-    height: 220px;
-    left: 10%;
-    text-align: left;
-  
-    h3{
-    color: #333333;
-    font-size: 25px;
-    margin-bottom: 20px;
-    }
-    p{
+
+    .newsNews {
+      border-bottom: 1px solid #eeeeee;
+      height: 320px;
+      display: flex;
+      justify-content: center;
+
+      .newsNews-text {
+        position: relative;
+        top: 33px;
+        width: 888px;
+        height: 220px;
+        left: 2%;
+        text-align: left;
+
+        h3 {
           color: #333333;
-    font-size: 18px;
-    line-height: 2;
-    height: 100px;
+          font-size: 25px;
+          margin-bottom: 20px;
+        }
+
+        p {
+          color: #333333;
+          font-size: 18px;
+          line-height: 2;
+          height: 100px;
+        }
+
+        span {
+          margin-top: 40px;
+          display: block;
+          min-width: 50px;
+          height: 17px;
+          line-height: 17px;
+          color: #fff;
+          text-align: center;
+          font-size: 12px;
+          margin-right: 15px;
+          background: #72b5f1;
+          float: left;
+          margin-left: 5%;
+
+          &:last-child,
+          &:nth-child(4),
+          &:nth-child(5) {
+            color: black;
+            background: none;
+          }
+
+          &:nth-child(4) {
+            margin-left: 10%;
+          }
+        }
+      }
     }
-    span{
-    margin-top: 40px;
-    display: block;
-    min-width: 50px;
-    height: 17px;
-    line-height: 17px;
-    color: #fff;
-    text-align: center;
-    font-size: 12px;
-    margin-right: 37px;
-    background: #72b5f1;
-    float: left;
-    margin-left: 5%;
-    &:last-child,&:nth-child(4),&:nth-child(5){
-      color: black;
-      background: none;
-    }
-    &:nth-child(4){
-      margin-left: 10%;
-    }
-    }
-  }
-}
 
   }
 </style>
