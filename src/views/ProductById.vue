@@ -109,8 +109,8 @@
             <div class="prevpage wrapper">
                 <div class="words clearfix"><span>关键词：</span><a href="#">返回上一页</a></div>
                 <div class="prebnext">
-                    <div class="preinfo"><a href="./#/LED">上一篇：便携式应急灯</a></div>
-                    <div class="preinfo"><a href="./#/KT100">下一篇：RST-KT100工业路由器</a></div>
+                    <div class="preinfo"><a href="./#/productbyid?id=129">上一篇：便携式应急灯</a></div>
+                    <div class="preinfo"><a href="./#/productbyid?id=126">下一篇：RST-KT100工业路由器</a></div>
                 </div>
             </div>
 

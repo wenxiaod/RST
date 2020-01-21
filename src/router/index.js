@@ -35,50 +35,7 @@ const routes = [{
         }
 
     },
-    // {
-    //     path: "/rst1100",
-    //     name: "rst1100",
-    //     // 链接 硬件产品详情页 视图
-    //     component: () =>
-    //         import ("../views/RST1100.vue"),
-    //     meta: {
-    //         title: '硬件产品-成都蓉视通科技有限公司'
-    //     }
 
-    // },
-    // {
-    //     path: "/kt100",
-    //     name: "kt100",
-    //     // 链接 硬件产品详情页 视图
-    //     component: () =>
-    //         import ("../views/KT100.vue"),
-    //     meta: {
-    //         title: '硬件产品-成都蓉视通科技有限公司'
-    //     }
-
-    // },
-    // {
-    //     path: "/cpe",
-    //     name: "cpe",
-    //     // 链接 硬件产品详情页 视图
-    //     component: () =>
-    //         import ("../views/CPE.vue"),
-    //     meta: {
-    //         title: '硬件产品-成都蓉视通科技有限公司'
-    //     }
-
-    // },
-    // {
-    //     path: "/led",
-    //     name: "led",
-    //     // 链接 硬件产品详情页 视图
-    //     component: () =>
-    //         import ("../views/LED.vue"),
-    //     meta: {
-    //         title: '硬件产品-成都蓉视通科技有限公司'
-    //     }
-
-    // },
 
     {
         path: "/solution",
@@ -135,6 +92,25 @@ const routes = [{
         }
 
     },
+    // {
+    //     path: '/about/chatting',
+    //     name: 'Chatting',
+    //     component: () =>
+    //         import ("../components/Chatting.vue")
+    // },
+    // {
+    //     path: '/about/chat',
+    //     name: 'Chat',
+    //     component: () =>
+    //         import ("../components/Chat.vue")
+    // },
+    // {
+    //     path: '/about/ai',
+    //     name: 'AI',
+    //     component: () =>
+    //         import ("../components/AI.vue")
+    // }
+
 ];
 
 const router = new VueRouter({

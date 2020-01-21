@@ -13,16 +13,16 @@
               <router-link style="color:#666666;" to="/product">硬件产品</router-link>
             </template>
             <el-menu-item index="2-1" style="padding:0;">
-              <router-link to="/productbyid?id=14">1100型路由器</router-link>
+              <router-link to="/productbyid?id=125">1100型路由器</router-link>
             </el-menu-item>
             <el-menu-item index="2-2" style="padding:0;">
-              <router-link to="/productbyid?id=15">KT100型路由器</router-link>
+              <router-link to="/productbyid?id=126">KT100型路由器</router-link>
             </el-menu-item>
             <el-menu-item index="2-3" style="padding:0;">
-              <router-link to="/productbyid?id=16">室内CPE</router-link>
+              <router-link to="/productbyid?id=127">室内CPE</router-link>
             </el-menu-item>
             <el-menu-item index="2-4" style="padding:0;">
-              <router-link to="/productbyid?id=17">便捷式应急灯</router-link>
+              <router-link to="/productbyid?id=129">便捷式应急灯</router-link>
             </el-menu-item>
           </el-submenu>
         </el-menu-item>

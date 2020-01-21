@@ -1,6 +1,7 @@
 <template>
   <div id="about">
     <onlineQQ />
+    <!-- <Chatting /> -->
     <Chat />
     <img class="aboutUsHead " src="../../public/images/aboutUsHead.jpg" alt="">
     <!-- Tab选项卡效果 -->
@@ -263,7 +264,8 @@
 
 <script>
   import onlineQQ from "../components/onlineQQ"
-  import Chat from "../components/Chat"
+  // import Chatting from "../components/Chatting"
+   import Chat from "../components/Chat"
   import Pager from "../components/Pager"
   export default {
     name: "about",
@@ -316,8 +318,9 @@
     },
     components: {
       onlineQQ,
-      Chat,
-      Pager
+      // Chatting,
+      Pager,
+      Chat
     },
     created() {
       // => 请求数据挂载
